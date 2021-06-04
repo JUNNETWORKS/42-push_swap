@@ -1,0 +1,35 @@
+NAME := push_swap
+CC := gcc
+CFLAGS := -Werror -Wall -Wextra -g
+
+LIBFT_PATH := libft
+LIBFT_MAKE := $(MAKE) -C $(LIBFT_PATH)
+LIBFT_LIB := -L./libft -lft
+
+HEADER_FILES := push_swap.h
+SRCS := main.c
+OBJS := ${SRCS:.c=.o}
+DEPS := ${SRCS:.c=.d}
+
+all: ${NAME}
+
+%.o: %.c
+	# -MMD -MP -MF で依存ファイルリスト生成
+	$(CC) $(CFLAGS)  -MMD -MP -MF $(<:.c=.d) -c $< -o $@
+
+-include $(DEPS)
+$(NAME): ${OBJS}
+	$(LIBFT_MAKE)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
+
+clean:
+	$(LIBFT_MAKE) clean
+	${RM} ${OBJS}
+
+fclean: clean
+	$(LIBFT_MAKE) fclean
+	${RM} ${NAME}
+
+re: fclean all
+
+.PHONY: all clean fclean re

@@ -1,0 +1,4 @@
+# output files
+*.o
+*.d
+/push_swap
