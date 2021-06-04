@@ -20,11 +20,12 @@ all: ${NAME}
 -include $(DEPS)
 $(NAME): ${OBJS}
 	$(LIBFT_MAKE)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS) $(LIBFT_LIB)
 
 clean:
 	$(LIBFT_MAKE) clean
 	${RM} ${OBJS}
+	${RM} ${DEPS}
 
 fclean: clean
 	$(LIBFT_MAKE) fclean

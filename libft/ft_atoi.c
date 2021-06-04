@@ -6,13 +6,14 @@
 /*   By: jtanaka <jtanaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 02:58:56 by jtanaka           #+#    #+#             */
-/*   Updated: 2021/04/02 17:12:12 by jtanaka          ###   ########.fr       */
+/*   Updated: 2021/06/04 21:40:36 by jtanaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdbool.h>
 #include "libft.h"
 
-static int	num_len(const char *str)
+int	num_len(const char *str)
 {
 	int	i;
 
@@ -22,7 +23,7 @@ static int	num_len(const char *str)
 	return (i);
 }
 
-static bool	is_overflow(const char *nptr, int sign)
+bool	is_overflow(const char *nptr, int sign)
 {
 	if (num_len(nptr) > 19)
 		return (true);

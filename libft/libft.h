@@ -6,7 +6,7 @@
 /*   By: jtanaka <jtanaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 00:05:30 by jtanaka           #+#    #+#             */
-/*   Updated: 2021/04/03 17:04:05 by jtanaka          ###   ########.fr       */
+/*   Updated: 2021/06/04 18:28:18 by jtanaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char				*ft_strrchr(const char *s, int c);
 char				*ft_strnstr(const char *big, const char *little,
 						size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					num_len(const char *str);
+bool				is_overflow(const char *nptr, int sign);
 int					ft_atoi(const char *nptr);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
