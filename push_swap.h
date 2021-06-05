@@ -37,4 +37,8 @@ void	dlist_swap_first2(t_dlist *dummy);
 void	dlist_rotate(t_dlist *dummy);
 void	dlist_rrotate(t_dlist *dummy);
 
+void	push_a(t_dlist *dummy_a, t_dlist *dummy_b);
+void	push_b(t_dlist *dummy_a, t_dlist *dummy_b);
+void	print_stacks(t_dlist *dummy_a, t_dlist *dummy_b);
+
 #endif

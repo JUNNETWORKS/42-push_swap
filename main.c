@@ -65,8 +65,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	printf("HELLO PUSH_SWAP\n");
-	for (t_dlist *current = dummy_a->next; current != dummy_a; current = current->next)
-		printf("%16p: %3d\n", current, current->val);
+	print_stacks(dummy_a, dummy_b);
 	printf("dummy_a has %d elements\n", dlist_len(dummy_a));
 	printf("---- dlist function tests ----\n");
 	char		*buf = NULL;
@@ -83,7 +82,6 @@ int	main(int argc, char **argv)
 			printf("invalid command\n");
 		free(buf);
 		buf = NULL;
-		for (t_dlist *current = dummy_a->next; current != dummy_a; current = current->next)
-			printf("%16p: %3d\n", current, current->val);
+		print_stacks(dummy_a, dummy_b);
 	}
 }
