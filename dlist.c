@@ -58,3 +58,21 @@ void	free_dlist(t_dlist *dummy)
 	}
 	free(dummy);
 }
+
+t_dlist	*dlist_pop(t_dlist *dummy)
+{
+	t_dlist	*element;
+
+	element = dummy->next;
+	dummy->next = element->next;
+	element->next->prev = dummy;
+	return (element);
+}
+
+void	dlist_push(t_dlist *dummy, t_dlist *element)
+{
+	dummy->next->prev = element;
+	element->next = dummy->next;
+	element->prev = dummy;
+	dummy->next = element;
+}
