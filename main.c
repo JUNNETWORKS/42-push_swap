@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "libft/libft.h"
+#include "push_swap.h"
 
 /* parse nptr into num.
  *
@@ -28,43 +29,41 @@ static bool	my_atoi(const char *nptr, int *num)
 	return (true);
 }
 
-static int	*parse_argv(char **argv)
+static bool	parse_argv(t_dlist *dummy, char **argv)
 {
-	int	*num_arr;
+	int	val;
 	int	i;
 
-	num_arr = malloc(sizeof(int) * ptrarr_len((void **)argv));
-	if (!num_arr)
-		return (NULL);
 	i = 0;
 	while (argv[i])
 	{
-		if (!my_atoi(argv[i], &num_arr[i]))
-		{
-			free(num_arr);
-			return (NULL);
-		}
+		if (!my_atoi(argv[i], &val) || !dlist_add_prev(dummy, val))
+			return (false);
 		i++;
 	}
-	return (num_arr);
+	return (true);
 }
 
 int	main(int argc, char **argv)
 {
-	int	*num_arr;
+	t_dlist	*dummy_a;
+	t_dlist	*dummy_b;
 
 	if (argc <= 1)
 	{
 		printf("Invalid argc\n");
 		return (1);
 	}
-	num_arr = parse_argv(argv + 1);
-	if (!num_arr)
+	dummy_a = create_dlist(0);
+	dummy_b = create_dlist(0);
+	if (!dummy_a || !dummy_b || !parse_argv(dummy_a, argv + 1))
 	{
-		printf("nums are invalid\n");
+		printf("nums are invalid or malloc() failed\n");
+		free_dlist(dummy_a);
+		free_dlist(dummy_b);
 		return (1);
 	}
-	for (int i = 0; i < argc - 1; i++)
-		printf("nums[%d]: %d\n", i, num_arr[i]);
 	printf("HELLO PUSH_SWAP\n");
+	for (t_dlist *current = dummy_a->next; current != dummy_a; current = current->next)
+		printf("%16p: %d\n", current, current->val);
 }
