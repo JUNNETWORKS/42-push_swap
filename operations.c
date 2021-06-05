@@ -52,7 +52,7 @@ void	print_stacks(t_dlist *dummy_a, t_dlist *dummy_b)
 		else
 			printf("|    |");
 		printf("  ");
-		if (len_b > 0 && len_b >= len_a)
+		if (len_b > 0 && len_b > len_a)
 		{
 			printf("|%4d|", current_b->val);
 			current_b = current_b->next;
