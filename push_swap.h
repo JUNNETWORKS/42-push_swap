@@ -33,5 +33,8 @@ int		dlist_len(t_dlist *dummy);
 void	free_dlist(t_dlist *dummy);
 t_dlist	*dlist_pop(t_dlist *dummy);
 void	dlist_push(t_dlist *dummy, t_dlist *element);
+void	dlist_swap_first2(t_dlist *dummy);
+void	dlist_rotate(t_dlist *dummy);
+void	dlist_rrotate(t_dlist *dummy);
 
 #endif
