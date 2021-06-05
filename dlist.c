@@ -44,6 +44,21 @@ t_dlist	*dlist_add_prev(t_dlist *dummy, int val)
 	return (new);
 }
 
+int	dlist_len(t_dlist *dummy)
+{
+	t_dlist	*current;
+	int		len;
+
+	current = dummy->next;
+	len = 0;
+	while (current != dummy)
+	{
+		current = current->next;
+		len++;
+	}
+	return (len);
+}
+
 void	free_dlist(t_dlist *dummy)
 {
 	t_dlist	*current;
