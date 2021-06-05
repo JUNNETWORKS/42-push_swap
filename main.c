@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include "libft/libft.h"
 #include "push_swap.h"
 
@@ -65,5 +66,24 @@ int	main(int argc, char **argv)
 	}
 	printf("HELLO PUSH_SWAP\n");
 	for (t_dlist *current = dummy_a->next; current != dummy_a; current = current->next)
-		printf("%16p: %d\n", current, current->val);
+		printf("%16p: %3d\n", current, current->val);
+	printf("dummy_a has %d elements\n", dlist_len(dummy_a));
+	printf("---- dlist function tests ----\n");
+	char		*buf = NULL;
+	size_t		read_len;
+	while (getline(&buf, &read_len, stdin) > 0)
+	{
+		if (!ft_strncmp(buf, "swap", 4))
+			dlist_swap_first2(dummy_a);
+		else if (!ft_strncmp(buf, "rotate", 6))
+			dlist_rotate(dummy_a);
+		else if (!ft_strncmp(buf, "rrotate", 7))
+			dlist_rrotate(dummy_a);
+		else
+			printf("invalid command\n");
+		free(buf);
+		buf = NULL;
+		for (t_dlist *current = dummy_a->next; current != dummy_a; current = current->next)
+			printf("%16p: %3d\n", current, current->val);
+	}
 }
