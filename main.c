@@ -78,6 +78,10 @@ int	main(int argc, char **argv)
 			dlist_rotate(dummy_a);
 		else if (!ft_strncmp(buf, "rrotate", 7))
 			dlist_rrotate(dummy_a);
+		else if (!ft_strncmp(buf, "psa", 3))
+			push_a(dummy_a, dummy_b);
+		else if (!ft_strncmp(buf, "psb", 3))
+			push_b(dummy_a, dummy_b);
 		else
 			printf("invalid command\n");
 		free(buf);
