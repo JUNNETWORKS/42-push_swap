@@ -72,12 +72,18 @@ int	main(int argc, char **argv)
 	size_t		read_len;
 	while (getline(&buf, &read_len, stdin) > 0)
 	{
-		if (!ft_strncmp(buf, "swap", 4))
+		if (!ft_strncmp(buf, "swa", 3))
 			dlist_swap_first2(dummy_a);
-		else if (!ft_strncmp(buf, "rotate", 6))
+		else if (!ft_strncmp(buf, "swb", 3))
+			dlist_swap_first2(dummy_b);
+		else if (!ft_strncmp(buf, "ra", 2))
 			dlist_rotate(dummy_a);
-		else if (!ft_strncmp(buf, "rrotate", 7))
+		else if (!ft_strncmp(buf, "rb", 2))
+			dlist_rotate(dummy_b);
+		else if (!ft_strncmp(buf, "rra", 3))
 			dlist_rrotate(dummy_a);
+		else if (!ft_strncmp(buf, "rrb", 3))
+			dlist_rrotate(dummy_b);
 		else if (!ft_strncmp(buf, "psa", 3))
 			push_a(dummy_a, dummy_b);
 		else if (!ft_strncmp(buf, "psb", 3))
