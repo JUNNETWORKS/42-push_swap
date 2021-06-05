@@ -78,6 +78,8 @@ t_dlist	*dlist_pop(t_dlist *dummy)
 {
 	t_dlist	*element;
 
+	if (!dlist_len(dummy))
+		return (NULL);
 	element = dummy->next;
 	dummy->next = element->next;
 	element->next->prev = dummy;
