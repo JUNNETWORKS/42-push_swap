@@ -57,6 +57,7 @@ int	main(int argc, char **argv)
 	}
 	dummy_a = create_dlist(0);
 	dummy_b = create_dlist(0);
+	// dummy_actions = create_dlist(0);
 	if (!dummy_a || !dummy_b || !parse_argv(dummy_a, argv + 1))
 	{
 		printf("nums are invalid or malloc() failed\n");
