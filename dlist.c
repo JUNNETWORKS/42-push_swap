@@ -81,7 +81,7 @@ bool	dlist_at(t_dlist *dummy, int idx, int *val)
 
 	i = 0;
 	current = dummy->next;
-	while (current)
+	while (current != dummy)
 	{
 		if (i == idx)
 		{
