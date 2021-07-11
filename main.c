@@ -84,9 +84,9 @@ int	main(int argc, char **argv)
 			dlist_rrotate(dummy_a);
 		else if (!ft_strncmp(buf, "rrb", 3))
 			dlist_rrotate(dummy_b);
-		else if (!ft_strncmp(buf, "psa", 3))
+		else if (!ft_strncmp(buf, "pa", 2))
 			push_a(dummy_a, dummy_b);
-		else if (!ft_strncmp(buf, "psb", 3))
+		else if (!ft_strncmp(buf, "pb", 2))
 			push_b(dummy_a, dummy_b);
 		else
 			printf("invalid command\n");
