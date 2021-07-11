@@ -2,3 +2,4 @@
 *.o
 *.d
 /push_swap
+/checker_linux
