@@ -7,7 +7,10 @@ LIBFT_MAKE := $(MAKE) -C $(LIBFT_PATH)
 LIBFT_LIB := -L./libft -lft
 
 HEADER_FILES := push_swap.h
-SRCS := main.c dlist.c operations.c sort_stacks.c sort_le_3_elements.c sort_le_6_elements.c
+SRCS := main.c \
+		dlist.c dlist2.c dlist3.c \
+		operations.c \
+		sort_stacks.c sort_le_3_elements.c sort_le_6_elements.c
 OBJS := ${SRCS:.c=.o}
 DEPS := ${SRCS:.c=.d}
 

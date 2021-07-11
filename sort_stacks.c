@@ -6,6 +6,7 @@ void	sort_many_elements(t_dlist *dummy_a, t_dlist *dummy_b)
 {
 	(void)dummy_a;
 	(void)dummy_b;
+	// pivotを求めるために事前にソートした結果の配列を求めておく
 	return ;
 }
 
