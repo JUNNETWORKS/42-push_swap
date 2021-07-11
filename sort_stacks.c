@@ -10,7 +10,6 @@ void	sort_3_le_elements(t_dlist *dummy_a, t_dlist *dummy_b)
 	int	value2;
 
 	(void)dummy_b;
-	(void)value2;
 	if (dlist_len(dummy_a) == 2)
 	{
 		dlist_at(dummy_a, 0, &value0);
@@ -20,7 +19,31 @@ void	sort_3_le_elements(t_dlist *dummy_a, t_dlist *dummy_b)
 	}
 	else if (dlist_len(dummy_a) == 3)
 	{
-		return ;
+		dlist_at(dummy_a, 0, &value0);
+		dlist_at(dummy_a, 1, &value1);
+		dlist_at(dummy_a, 2, &value2);
+		if (value0 > value1)
+		{
+			if (value1 > value2)
+			{
+				dlist_swap_first2(dummy_a);
+				dlist_rrotate(dummy_a);
+			}
+			else if (value0 > value2)
+				dlist_rotate(dummy_a);
+			else
+				dlist_swap_first2(dummy_a);
+		}
+		else
+		{
+			if (value0 > value2)
+				dlist_rrotate(dummy_a);
+			else
+			{
+				dlist_swap_first2(dummy_a);
+				dlist_rotate(dummy_a);
+			}
+		}
 	}
 }
 
