@@ -64,8 +64,8 @@ void	sort_6_le_elements(t_dlist *dummy_a, t_dlist *dummy_b)
 	print_stacks(dummy_a, dummy_b);
 	sort_3_le_elements(dummy_a);
 	print_stacks(dummy_a, dummy_b);
-	push_a(dummy_a, dummy_b);
-	push_a(dummy_a, dummy_b);
+	while (dlist_len(dummy_b))
+		push_a(dummy_a, dummy_b);
 	return ;
 }
 
