@@ -33,15 +33,15 @@ void	sort_3_le_elements(t_dlist *dummy_a)
 			else
 				dlist_swap_first2(dummy_a);
 		}
-		else
+		else if (value0 > value2 || value1 > value2)
 		{
-			if (value0 > value2)
-				dlist_rrotate(dummy_a);
-			else
+			if (value0 < value2)
 			{
 				dlist_swap_first2(dummy_a);
 				dlist_rotate(dummy_a);
 			}
+			else if (value0 > value2)
+				dlist_rrotate(dummy_a);
 		}
 	}
 }
