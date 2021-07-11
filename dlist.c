@@ -74,6 +74,26 @@ void	free_dlist(t_dlist *dummy)
 	free(dummy);
 }
 
+bool	dlist_at(t_dlist *dummy, int idx, int *val)
+{
+	int		i;
+	t_dlist	*current;
+
+	i = 0;
+	current = dummy->next;
+	while (current)
+	{
+		if (i == idx)
+		{
+			*val = current->val;
+			return (true);
+		}
+		current = current->next;
+		i++;
+	}
+	return (false);
+}
+
 t_dlist	*dlist_pop(t_dlist *dummy)
 {
 	t_dlist	*element;

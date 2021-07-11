@@ -64,34 +64,9 @@ int	main(int argc, char **argv)
 		free_dlist(dummy_b);
 		return (1);
 	}
-	printf("HELLO PUSH_SWAP\n");
-	print_stacks(dummy_a, dummy_b);
 	printf("dummy_a has %d elements\n", dlist_len(dummy_a));
-	printf("---- dlist function tests ----\n");
-	char		*buf = NULL;
-	size_t		read_len;
-	while (getline(&buf, &read_len, stdin) > 0)
-	{
-		if (!ft_strncmp(buf, "swa", 3))
-			dlist_swap_first2(dummy_a);
-		else if (!ft_strncmp(buf, "swb", 3))
-			dlist_swap_first2(dummy_b);
-		else if (!ft_strncmp(buf, "ra", 2))
-			dlist_rotate(dummy_a);
-		else if (!ft_strncmp(buf, "rb", 2))
-			dlist_rotate(dummy_b);
-		else if (!ft_strncmp(buf, "rra", 3))
-			dlist_rrotate(dummy_a);
-		else if (!ft_strncmp(buf, "rrb", 3))
-			dlist_rrotate(dummy_b);
-		else if (!ft_strncmp(buf, "pa", 2))
-			push_a(dummy_a, dummy_b);
-		else if (!ft_strncmp(buf, "pb", 2))
-			push_b(dummy_a, dummy_b);
-		else
-			printf("invalid command\n");
-		free(buf);
-		buf = NULL;
-		print_stacks(dummy_a, dummy_b);
-	}
+	print_stacks(dummy_a, dummy_b);
+	sort_stacks(dummy_a, dummy_b);
+	printf("\n---------- stacks has been sorted ----------\n\n");
+	print_stacks(dummy_a, dummy_b);
 }
