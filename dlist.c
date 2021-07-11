@@ -1,3 +1,4 @@
+#include <limits.h>
 #include "libft/libft.h"
 #include "push_swap.h"
 
@@ -92,6 +93,30 @@ bool	dlist_at(t_dlist *dummy, int idx, int *val)
 		i++;
 	}
 	return (false);
+}
+
+int	dlist_get_min_val_idx(t_dlist *dummy)
+{
+	int		i;
+	int		min_val;
+	int		min_idx;
+	t_dlist	*current;
+
+	min_val = INT_MAX;
+	min_idx = -1;
+	current = dummy->next;
+	i = 0;
+	while (current != dummy)
+	{
+		if (current->val < min_val)
+		{
+			min_val = current->val;
+			min_idx = i;
+		}
+		current = current->next;
+		i++;
+	}
+	return (min_idx);
 }
 
 t_dlist	*dlist_pop(t_dlist *dummy)
