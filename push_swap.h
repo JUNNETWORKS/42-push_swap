@@ -42,6 +42,7 @@ void	dlist_rrotate(t_dlist *dummy);
 void	push_a(t_dlist *dummy_a, t_dlist *dummy_b);
 void	push_b(t_dlist *dummy_a, t_dlist *dummy_b);
 void	print_stacks(t_dlist *dummy_a, t_dlist *dummy_b);
+void	sort_arr(int *arr, int n);
 void	sort_stacks(t_dlist *dummy_a, t_dlist *dummy_b);
 void	sort_le_3_elements(t_dlist *dummy_a);
 void	sort_le_6_elements(t_dlist *dummy_a, t_dlist *dummy_b);

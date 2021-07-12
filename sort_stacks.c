@@ -1,12 +1,20 @@
+#include <stdio.h>
 #include <unistd.h>
 #include "libft/libft.h"
 #include "push_swap.h"
 
 void	sort_many_elements(t_dlist *dummy_a, t_dlist *dummy_b)
 {
-	(void)dummy_a;
+	int	*arr;
 	(void)dummy_b;
+
 	// pivotを求めるために事前にソートした結果の配列を求めておく
+	arr = dlist2arr(dummy_a);
+	if (!arr)
+		exit(1);
+	sort_arr(arr, dlist_len(dummy_a));
+	for (int i = 0; i < dlist_len(dummy_a); i++)
+		printf("arr[%d]: %d\n", i, arr[i]);
 	return ;
 }
 
