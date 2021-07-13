@@ -30,50 +30,25 @@ int	partition_stacks(t_dlist *dummy_a, t_dlist *dummy_b, int pivot, int len, boo
 	return (adding_count);
 }
 
-bool	is_stack_sorted_asc(t_dlist *dummy, int len)
+/*
+ * return: dlist_len(dummy_b)
+ */
+int merge_sorted_b2a(t_dlist *dummy_a, t_dlist *dummy_b)
 {
-	t_dlist *current;
-	int max;
-	int i;
+	int		b_len;
+	bool	is_sorted_des;
 
-	current = dummy->next;
-	max = current->val;
-	i = 0;
-	if (len < 0)
-		len = dlist_len(dummy);
-	while (i < len)
+	is_sorted_des = is_stack_sorted_des(dummy_b, -1);
+	b_len = dlist_len(dummy_b);
+	while (dlist_len(dummy_b))
 	{
-		if (current->val < max)
-			return (false);
-		max = current->val;
-		current = current->next;
-		i++;
+		if (is_sorted_des)
+			dlist_rrotate(dummy_b);
+		push_a(dummy_a, dummy_b);
+		dlist_rotate(dummy_a);
 	}
-	return (true);
+	return (b_len);
 }
-
-bool	is_stack_sorted_des(t_dlist *dummy, int len)
-{
-	t_dlist *current;
-	int min;
-	int i;
-
-	current = dummy->next;
-	min = current->val;
-	i = 0;
-	if (len < 0)
-		len = dlist_len(dummy);
-	while (i < len)
-	{
-		if (current->val > min)
-			return (false);
-		min = current->val;
-		current = current->next;
-		i++;
-	}
-	return (true);
-}
-
 
 /*
  * dummy_a: dummy node of stack A
@@ -85,7 +60,8 @@ bool	is_stack_sorted_des(t_dlist *dummy, int len)
  */
 int	quick_sort_stack(t_dlist *dummy_a, t_dlist *dummy_b, int *arr, int len)
 {
-	int sorted_count;
+	int	sorted_count;
+	int	pivot;
 
 	printf("quick_sort_stack(), len: %d\n", len);
 	print_stacks(dummy_a, dummy_b);
@@ -94,30 +70,28 @@ int	quick_sort_stack(t_dlist *dummy_a, t_dlist *dummy_b, int *arr, int len)
 		sort_le_3_elements(dummy_b);
 	if (dlist_len(dummy_b)
 		&& (is_stack_sorted_asc(dummy_b, -1) || is_stack_sorted_des(dummy_b, -1)))
-	{
-		int i;
-		int b_len;
-		bool is_sorted_des;
-
-		is_sorted_des = is_stack_sorted_des(dummy_b, -1);
-		b_len = dlist_len(dummy_b);
-		while (dlist_len(dummy_b))
-		{
-			if (is_sorted_des)
-				dlist_rrotate(dummy_b);
-			push_a(dummy_a, dummy_b);
-		}
-		i = 0;
-		while (i++ < b_len)
-			dlist_rotate(dummy_a);
-		return (b_len);
-	}
+		return (merge_sorted_b2a(dummy_a, dummy_b));
 	// arr[len/2] より小さいのをstackBに移動
-	partition_stacks(dummy_a, dummy_b, arr[len / 2], len, false);
+	// pivot = arr[len / 2];
+	pivot = dummy_a->prev->val;
+	printf("pivot: %d\n", pivot);
+	partition_stacks(dummy_a, dummy_b, pivot, len, false);
+	// ソート状態になるまでスタックBを半分にしていく
+	sorted_count = 0;
+	while (!(is_stack_sorted_asc(dummy_b, -1) || is_stack_sorted_des(dummy_b, -1)))
+	{
+		dlist_at(dummy_b, dlist_get_min_val_idx(dummy_b), &pivot);
+		printf("pivot: %d\n", pivot); partition_stacks(dummy_b, dummy_a, pivot, dlist_len(dummy_b), true);
+		if (dlist_len(dummy_b) <= 3)
+			sort_le_3_elements(dummy_b);
+		print_stacks(dummy_a, dummy_b);
+		sleep(1);
+	}
+	printf("start merge!\n");
+	sorted_count = merge_sorted_b2a(dummy_a, dummy_b);
 	// stackBがソートされた状態になるまでAに要素を移動
-	sorted_count = quick_sort_stack(dummy_b, dummy_a, arr, dlist_len(dummy_b));
-	quick_sort_stack(dummy_a, dummy_b, arr, dlist_len(dummy_a) - sorted_count);
-	return (0);  // TODO: return the number of elements which has been sorted in this call.
+	sorted_count += quick_sort_stack(dummy_b, dummy_a, arr, dlist_len(dummy_a) - sorted_count);
+	return (sorted_count);
 }
 
 void	sort_many_elements(t_dlist *dummy_a, t_dlist *dummy_b)
