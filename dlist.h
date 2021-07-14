@@ -28,4 +28,3 @@ void	dlist_rotate(t_dlist *dummy);
 void	dlist_rrotate(t_dlist *dummy);
 
 #endif
-
