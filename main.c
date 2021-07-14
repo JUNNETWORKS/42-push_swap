@@ -16,20 +16,18 @@ int	main(int argc, char **argv)
 {
 	t_stacks	stacks;
 
-	if (argc <= 1)
-	{
-		printf("Invalid argc\n");
-		return (1);
-	}
 	init_stacks(&stacks);
-	if (!parse_argv(stacks.dummy_a, argv + 1))
-	{
-		printf("nums are invalid or malloc() failed\n");
+	if (argc <= 1 || !parse_argv(stacks.dummy_a, argv + 1))
 		return (1);
-	}
+#if DEBUG
 	printf("dummy_a has %d elements\n", dlist_len(stacks.dummy_a));
 	print_stacks(&stacks);
+#endif
+
 	sort_stacks(&stacks);
+	print_all_operations(&stacks);
+
+#if DEBUG
 	printf("\n---------- stacks has been sorted ----------\n\n");
 	print_stacks(&stacks);
 
@@ -43,4 +41,5 @@ int	main(int argc, char **argv)
 		free((char *)op_str);
 	}
 	printf("operations count: %d\n", dlist_len(stacks.dummy_ops));
+#endif
 }

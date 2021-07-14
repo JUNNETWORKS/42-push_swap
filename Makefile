@@ -26,6 +26,9 @@ $(NAME): ${OBJS}
 	$(LIBFT_MAKE)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS) $(LIBFT_LIB)
 
+debug: fclean
+	$(MAKE) CFLAGS="$(CFLAGS) -D DEBUG=1 -g"
+
 clean:
 	$(LIBFT_MAKE) clean
 	${RM} ${OBJS}
@@ -37,4 +40,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug
