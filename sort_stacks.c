@@ -78,6 +78,9 @@ void	quick_sort_stack(t_dlist *dummy_a, t_dlist *dummy_b, int unsorted_len)
 		pivot = dlist_get_mid_value(dummy_b, dlist_len(dummy_b));
 		printf("pivot (B to A): %d\n", pivot);
 		partition_stacks(dummy_b, dummy_a, pivot, dlist_len(dummy_b), true);
+		// pivotが上手く動いていない時はpivot-1を試す
+		if (dlist_get_mid_value(dummy_b, dlist_len(dummy_b)) == pivot)
+			partition_stacks(dummy_b, dummy_a, pivot - 1, dlist_len(dummy_b), true);
 		if (dlist_len(dummy_b) <= 3)
 			sort_le_3_elements(dummy_b);
 		print_stacks(dummy_a, dummy_b);
