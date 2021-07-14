@@ -60,6 +60,23 @@ void	stacks_rrotate(t_stacks *stacks, enum e_stacks stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_RRB);
 }
 
+void	print_all_operations(t_stacks *stacks)
+{
+	t_dlist		*current;
+	const char	*op_str;
+
+	current = stacks->dummy_ops->next;
+	while (current != stacks->dummy_ops)
+	{
+		op_str = get_operation_str(current->val);
+		if (!op_str)
+			exit(1);
+		ft_putendl_fd((char *)op_str, STDOUT_FILENO);
+		free((char *)op_str);
+		current = current->next;
+	}
+}
+
 void	print_stacks(t_stacks *stacks)
 {
 	int		len_a;

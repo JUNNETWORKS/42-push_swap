@@ -42,5 +42,6 @@ void	sort_le_6_elements(t_stacks *stacks, enum e_stacks stack_id);
 void	sort_many_elements(t_stacks *stacks, enum e_stacks stack_id);
 bool	is_stack_sorted_asc(t_dlist *dummy, int len);
 bool	is_stack_sorted_des(t_dlist *dummy, int len);
+void	print_all_operations(t_stacks *stacks);
 
 #endif

@@ -30,6 +30,20 @@ static bool	my_atoi(const char *nptr, int *num)
 	return (true);
 }
 
+static bool	is_duplicated(t_dlist *dummy_a, int val)
+{
+	t_dlist	*current;
+
+	current = dummy_a->next;
+	while (current != dummy_a)
+	{
+		if (current->val == val)
+			return (true);
+		current = current->next;
+	}
+	return (false);
+}
+
 bool	parse_argv(t_dlist *dummy_a, char **argv)
 {
 	int	val;
@@ -38,7 +52,9 @@ bool	parse_argv(t_dlist *dummy_a, char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		if (!my_atoi(argv[i], &val) || !dlist_add_prev(dummy_a, val))
+		if (!my_atoi(argv[i], &val)
+			|| is_duplicated(dummy_a, val)
+			|| !dlist_add_prev(dummy_a, val))
 			return (false);
 		i++;
 	}
