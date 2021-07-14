@@ -27,7 +27,7 @@ $(NAME): ${OBJS}
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS) $(LIBFT_LIB)
 
 debug: fclean
-	$(MAKE) CFLAGS="$(CFLAGS) -D DEBUG=1 -g"
+	$(MAKE) CFLAGS="$(CFLAGS) -D DEBUG=1"
 
 clean:
 	$(LIBFT_MAKE) clean
