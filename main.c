@@ -32,4 +32,15 @@ int	main(int argc, char **argv)
 	sort_stacks(&stacks);
 	printf("\n---------- stacks has been sorted ----------\n\n");
 	print_stacks(&stacks);
+
+	printf("\n---------- operations ----------\n");
+	for (t_dlist *current = stacks.dummy_ops->next; current != stacks.dummy_ops; current = current->next)
+	{
+		const char *op_str = get_operation_str(current->val);
+		if (!op_str)
+			exit(1);
+		printf("%s\n", op_str);
+		free((char *)op_str);
+	}
+	printf("operations count: %d\n", dlist_len(stacks.dummy_ops));
 }

@@ -2,25 +2,28 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-void	sort_le_6_elements(t_dlist *dummy_a, t_dlist *dummy_b)
+void	sort_le_6_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
 	int	min_idx;
+	t_dlist	*dummy;
+	t_dlist	*dummy_another;
 
+	dummy = get_stack_from_id(stacks, stack_id);
+	dummy_another = get_stack_from_id(stacks, !stack_id);
 	// スタックAのサイズが3になるまで小さい数をスタックBに移動させる
-	while (dlist_len(dummy_a) > 3)
+	while (dlist_len(dummy) > 3)
 	{
-		min_idx = dlist_get_min_val_idx(dummy_a);
+		min_idx = dlist_get_min_val_idx(dummy);
 		while (min_idx)
 		{
-			dlist_rotate(dummy_a);
+			stacks_rotate(stacks, stack_id);
 			min_idx--;
 		}
-		push_b(dummy_a, dummy_b);
+		stacks_push2another(stacks, stack_id);
 	}
-	print_stacks(dummy_a, dummy_b);
-	sort_le_3_elements(dummy_a);
-	print_stacks(dummy_a, dummy_b);
-	while (dlist_len(dummy_b))
-		push_a(dummy_a, dummy_b);
-	return ;
+	print_stacks(stacks);
+	sort_le_3_elements(stacks, stack_id);
+	print_stacks(stacks);
+	while (dlist_len(dummy_another))
+		stacks_push2another(stacks, !stack_id);
 }

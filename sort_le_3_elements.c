@@ -2,55 +2,63 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-static void	sort_2_elements(t_dlist *dummy_a)
+static void	sort_2_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
 	int	value0;
 	int	value1;
+	t_dlist	*dummy;
 
-	dlist_at(dummy_a, 0, &value0);
-	dlist_at(dummy_a, 1, &value1);
+	dummy = get_stack_from_id(stacks, stack_id);
+	dlist_at(dummy, 0, &value0);
+	dlist_at(dummy, 1, &value1);
 	if (value0 > value1)
-		dlist_swap_first2(dummy_a);
+	{
+		stacks_swap(stacks, stack_id);
+	}
 }
 
-static void	sort_3_elements(t_dlist *dummy_a)
+static void	sort_3_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
-	int	value0;
-	int	value1;
-	int	value2;
+	t_dlist	*dummy;
+	int		value0;
+	int		value1;
+	int		value2;
 
-	dlist_at(dummy_a, 0, &value0);
-	dlist_at(dummy_a, 1, &value1);
-	dlist_at(dummy_a, 2, &value2);
+	dummy = get_stack_from_id(stacks, stack_id);
+	dlist_at(dummy, 0, &value0);
+	dlist_at(dummy, 1, &value1);
+	dlist_at(dummy, 2, &value2);
 	if (value0 > value1)
 	{
 		if (value1 > value2)
 		{
-			dlist_swap_first2(dummy_a);
-			dlist_rrotate(dummy_a);
+			stacks_swap(stacks, stack_id);
+			stacks_rrotate(stacks, stack_id);
 		}
 		else if (value0 > value2)
-			dlist_rotate(dummy_a);
+			stacks_rotate(stacks, stack_id);
 		else
-			dlist_swap_first2(dummy_a);
+			stacks_swap(stacks, stack_id);
 	}
 	else if (value0 > value2 || value1 > value2)
 	{
 		if (value0 < value2)
 		{
-			dlist_swap_first2(dummy_a);
-			dlist_rotate(dummy_a);
+			stacks_swap(stacks, stack_id);
+			stacks_rotate(stacks, stack_id);
 		}
 		else if (value0 > value2)
-			dlist_rrotate(dummy_a);
+			stacks_rrotate(stacks, stack_id);
 	}
 }
 
-void	sort_le_3_elements(t_dlist *dummy_a)
+void	sort_le_3_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
-	if (dlist_len(dummy_a) == 2)
-		sort_2_elements(dummy_a);
-	else if (dlist_len(dummy_a) == 3)
-		sort_3_elements(dummy_a);
-}
+	t_dlist	*dummy;
 
+	dummy = get_stack_from_id(stacks, stack_id);
+	if (dlist_len(dummy) == 2)
+		sort_2_elements(stacks, stack_id);
+	else if (dlist_len(dummy) == 3)
+		sort_3_elements(stacks, stack_id);
+}

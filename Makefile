@@ -9,7 +9,7 @@ LIBFT_LIB := -L./libft -lft
 HEADER_FILES := push_swap.h
 SRCS := main.c parse_argv.c \
 		dlist1.c dlist2.c dlist3.c \
-		stacks_ops1.c stacks_ops2.c \
+		stacks.c stacks_ops.c \
 		sort_stacks.c sort_le_3_elements.c sort_le_6_elements.c sort_many_elements.c is_stack_sorted.c \
 		sort_arr.c
 OBJS := ${SRCS:.c=.o}

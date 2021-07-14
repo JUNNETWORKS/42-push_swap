@@ -3,29 +3,61 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-static int	partition_stacks(t_dlist *dummy_a, t_dlist *dummy_b, int pivot, int len, bool push2b_if_lt)
+// static int	partition_stacks(t_stacks *stacks, int pivot, int len, bool push2b_if_lt)
+static int	partition_stacks(t_stacks *stacks, enum e_stacks src_stack_id, int pivot, int len)
 {
 	t_dlist *current;
 	t_dlist *next;
+	t_dlist *dummy_src;
 	int i;
 	int adding_count;
-	int len_a;
+	int len_src;
 
 	i = 0;
 	adding_count = 0;
-	current = dummy_a->next;
-	len_a = dlist_len(dummy_a);
-	while (i < len_a)
+	dummy_src = get_stack_from_id(stacks, src_stack_id);
+	current = dummy_src->next;
+	len_src = dlist_len(dummy_src);
+	while (i < len_src)
 	{
 		next = current->next;
-		if (i < len && ((!push2b_if_lt && current->val <= pivot)
-				|| (push2b_if_lt && current->val > pivot)))
+		if (i < len && current->val <= pivot)
 		{
-			push_b(dummy_a, dummy_b);
+			stacks_push2another(stacks, src_stack_id);
 			adding_count++;
 		}
 		else
-			dlist_rotate(dummy_a);
+			stacks_rotate(stacks, src_stack_id);
+		current = next;
+		i++;
+	}
+	return (adding_count);
+}
+
+static int	partition_stacks_if_lt(t_stacks *stacks, enum e_stacks src_stack_id, int pivot, int len)
+{
+	t_dlist *current;
+	t_dlist *next;
+	t_dlist *dummy_src;
+	int i;
+	int adding_count;
+	int len_src;
+
+	i = 0;
+	adding_count = 0;
+	dummy_src = get_stack_from_id(stacks, src_stack_id);
+	current = dummy_src->next;
+	len_src = dlist_len(dummy_src);
+	while (i < len_src)
+	{
+		next = current->next;
+		if (i < len && current->val > pivot)
+		{
+			stacks_push2another(stacks, src_stack_id);
+			adding_count++;
+		}
+		else
+			stacks_rotate(stacks, src_stack_id);
 		current = next;
 		i++;
 	}
@@ -35,21 +67,23 @@ static int	partition_stacks(t_dlist *dummy_a, t_dlist *dummy_b, int pivot, int l
 /*
  * return: dlist_len(dummy_b)
  */
-static int merge_sorted_b2a(t_dlist *dummy_a, t_dlist *dummy_b)
+static int merge_sorted_stacks(t_stacks *stacks, enum e_stacks src_stack_id)
 {
-	int		b_len;
+	int		len_src;
 	bool	is_sorted_des;
+	t_dlist	*dummy_src;
 
-	is_sorted_des = is_stack_sorted_des(dummy_b, -1);
-	b_len = dlist_len(dummy_b);
-	while (dlist_len(dummy_b))
+	dummy_src = get_stack_from_id(stacks, src_stack_id);
+	is_sorted_des = is_stack_sorted_des(dummy_src, -1);
+	len_src = dlist_len(dummy_src);
+	while (dlist_len(dummy_src))
 	{
 		if (is_sorted_des)
-			dlist_rrotate(dummy_b);
-		push_a(dummy_a, dummy_b);
-		dlist_rotate(dummy_a);
+			dlist_rrotate(dummy_src);
+		stacks_push2another(stacks, src_stack_id);
+		stacks_rotate(stacks, !src_stack_id);
 	}
-	return (b_len);
+	return (len_src);
 }
 
 /*
@@ -60,41 +94,46 @@ static int merge_sorted_b2a(t_dlist *dummy_a, t_dlist *dummy_b)
  *
  * return: the number of elements has been sorted in this call.
  */
-static void	quick_sort_stack(t_dlist *dummy_a, t_dlist *dummy_b, int unsorted_len)
+static void	quick_sort_stack(t_stacks *stacks, int unsorted_len, enum e_stacks stack_id)
 {
 	int pivot;
 	int sorted_len;
+	t_dlist *dummy;
 
-	if (is_stack_sorted_asc(dummy_a, dlist_len(dummy_a)))
+	dummy = get_stack_from_id(stacks, stack_id);
+	if (is_stack_sorted_asc(dummy, dlist_len(dummy)))
 		return ;
 	// pivotを決めてstackBに移動させる
-	pivot = dlist_get_mid_value(dummy_a, unsorted_len);
+	pivot = dlist_get_mid_value(dummy, unsorted_len);
 	printf("pivot (A to B): %d, unsorted_len: %d\n", pivot, unsorted_len);
-	partition_stacks(dummy_a, dummy_b, pivot, unsorted_len, false);
+	partition_stacks(stacks, STACK_A, pivot, unsorted_len);
 	// Bが分割できなくなるまでAに要素を戻す
-	while (!(is_stack_sorted_des(dummy_b, dlist_len(dummy_b))
-			|| is_stack_sorted_asc(dummy_b, dlist_len(dummy_b))))
+	while (!(is_stack_sorted_des(stacks->dummy_b, dlist_len(stacks->dummy_b))
+			|| is_stack_sorted_asc(stacks->dummy_b, dlist_len(stacks->dummy_b))))
 	{
-		pivot = dlist_get_mid_value(dummy_b, dlist_len(dummy_b));
+		pivot = dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b));
 		printf("pivot (B to A): %d\n", pivot);
-		partition_stacks(dummy_b, dummy_a, pivot, dlist_len(dummy_b), true);
+		partition_stacks_if_lt(stacks, STACK_B, pivot, dlist_len(stacks->dummy_b));
 		// pivotが上手く動いていない時はpivot-1を試す
-		if (dlist_get_mid_value(dummy_b, dlist_len(dummy_b)) == pivot)
-			partition_stacks(dummy_b, dummy_a, pivot - 1, dlist_len(dummy_b), true);
-		if (dlist_len(dummy_b) <= 3)
-			sort_le_3_elements(dummy_b);
-		print_stacks(dummy_a, dummy_b);
+		if (dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b)) == pivot)
+			partition_stacks_if_lt(stacks, STACK_B, pivot - 1, dlist_len(stacks->dummy_b));
+		if (dlist_len(stacks->dummy_b) <= 3)
+			sort_le_3_elements(stacks, STACK_B);
+		print_stacks(stacks);
 	}
 	printf("finish sorting stack B\n");
-	sorted_len = merge_sorted_b2a(dummy_a, dummy_b);
+	sorted_len = merge_sorted_stacks(stacks, STACK_B);
 	printf("sorted_len: %d\n", sorted_len);
-	print_stacks(dummy_a, dummy_b);
+	print_stacks(stacks);
 	printf("next quick_sort_stack() will be started in 1 sec...\n");
 	sleep(1);
-	quick_sort_stack(dummy_a, dummy_b, unsorted_len - sorted_len);
+	quick_sort_stack(stacks, unsorted_len - sorted_len, STACK_A);
 }
 
-void	sort_many_elements(t_dlist *dummy_a, t_dlist *dummy_b)
+void	sort_many_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
-	quick_sort_stack(dummy_a, dummy_b, dlist_len(dummy_a));
+	t_dlist	*dummy;
+
+	dummy = get_stack_from_id(stacks, stack_id);
+	quick_sort_stack(stacks, dlist_len(dummy), stack_id);
 }
