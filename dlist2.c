@@ -1,6 +1,7 @@
 #include <limits.h>
 #include "libft/libft.h"
-#include "push_swap.h"
+#include "dlist.h"
+#include "utils.h"
 
 bool	dlist_at(t_dlist *dummy, int idx, int *val)
 {
