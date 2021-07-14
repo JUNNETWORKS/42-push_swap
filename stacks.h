@@ -32,11 +32,11 @@ void	rotate_b(t_stacks *stacks);
 void	rrotate_a(t_stacks *stacks);
 void	rrotate_b(t_stacks *stacks);
 
-void	print_stacks(t_dlist *dummy_a, t_dlist *dummy_b);
-void	sort_stacks(t_dlist *dummy_a, t_dlist *dummy_b);
-void	sort_le_3_elements(t_dlist *dummy_a);
-void	sort_le_6_elements(t_dlist *dummy_a, t_dlist *dummy_b);
-void	sort_many_elements(t_dlist *dummy_a, t_dlist *dummy_b);
+void	print_stacks(t_stacks *stacks);
+void	sort_stacks(t_stacks *stacks);
+void	sort_le_3_elements(t_stacks *stacks);
+void	sort_le_6_elements(t_stacks *stacks);
+void	sort_many_elements(t_stacks *stacks);
 bool	is_stack_sorted_asc(t_dlist *dummy, int len);
 bool	is_stack_sorted_des(t_dlist *dummy, int len);
 

@@ -3,28 +3,33 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
+static void	init_stacks(t_stacks *stacks)
+{
+	stacks->dummy_a = create_dlist(0);
+	stacks->dummy_b = create_dlist(0);
+	stacks->dummy_ops = create_dlist(0);
+	if (!(stacks->dummy_a && stacks->dummy_b && stacks->dummy_ops))
+		exit(1);
+}
+
 int	main(int argc, char **argv)
 {
-	t_dlist	*dummy_a;
-	t_dlist	*dummy_b;
-	t_dlist	*dummy_op;
+	t_stacks	stacks;
 
 	if (argc <= 1)
 	{
 		printf("Invalid argc\n");
 		return (1);
 	}
-	dummy_a = create_dlist(0);
-	dummy_b = create_dlist(0);
-	dummy_op = create_dlist(0);
-	if (!dummy_a || !dummy_b || !dummy_op || !parse_argv(dummy_a, argv + 1))
+	init_stacks(&stacks);
+	if (!parse_argv(stacks.dummy_a, argv + 1))
 	{
 		printf("nums are invalid or malloc() failed\n");
 		return (1);
 	}
-	printf("dummy_a has %d elements\n", dlist_len(dummy_a));
-	print_stacks(dummy_a, dummy_b);
-	sort_stacks(dummy_a, dummy_b);
+	printf("dummy_a has %d elements\n", dlist_len(stacks.dummy_a));
+	print_stacks(&stacks);
+	sort_stacks(&stacks);
 	printf("\n---------- stacks has been sorted ----------\n\n");
-	print_stacks(dummy_a, dummy_b);
+	print_stacks(&stacks);
 }
