@@ -67,3 +67,26 @@ int	*dlist2arr(t_dlist *dummy)
 	}
 	return (arr);
 }
+
+int	dlist_get_mid_value(t_dlist *dummy, int len)
+{
+	int	*arr;
+	int	mid_v;
+	int	i;
+	t_dlist	*current;
+
+	arr = malloc(sizeof(int) * len);
+	if (!arr)
+		exit(1);
+	i = 0;
+	current = dummy->next;
+	while (i < len)
+	{
+		arr[i++] = current->val;
+		current = current->next;
+	}
+	sort_arr(arr, len);
+	mid_v = arr[len / 2];
+	free(arr);
+	return (mid_v);
+}
