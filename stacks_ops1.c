@@ -1,33 +1,47 @@
 #include <stdio.h>
 #include "libft/libft.h"
-#include "push_swap.h"
+#include "stacks.h"
 
 /*
  * Take the first element at the top of b and put it at the top of a.
  * Do nothing if b is empty.
  */
-void	push_a(t_dlist *dummy_a, t_dlist *dummy_b)
+void	push_a(t_stacks *stacks)
 {
 	t_dlist	*top;
 
-	top = dlist_pop(dummy_b);
+	top = dlist_pop(stacks->dummy_b);
 	if (!top)
 		return ;
-	dlist_push(dummy_a, top);
+	dlist_push(stacks->dummy_a, top);
+	dlist_add_prev(stacks->dummy_ops, OP_PA);
 }
 
 /*
  * Take the first element at the top of a and put it at the top of b.
  * Do nothing if b is empty.
  */
-void	push_b(t_dlist *dummy_a, t_dlist *dummy_b)
+void	push_b(t_stacks *stacks)
 {
 	t_dlist	*top;
 
-	top = dlist_pop(dummy_a);
+	top = dlist_pop(stacks->dummy_a);
 	if (!top)
 		return ;
-	dlist_push(dummy_b, top);
+	dlist_push(stacks->dummy_b, top);
+	dlist_add_prev(stacks->dummy_ops, OP_PB);
+}
+
+void	swap_a(t_stacks *stacks)
+{
+	dlist_swap_first2(stacks->dummy_a);
+	dlist_add_prev(stacks->dummy_ops, OP_SA);
+}
+
+void	swap_b(t_stacks *stacks)
+{
+	dlist_swap_first2(stacks->dummy_b);
+	dlist_add_prev(stacks->dummy_ops, OP_SA);
 }
 
 void	print_stacks(t_dlist *dummy_a, t_dlist *dummy_b)
