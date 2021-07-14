@@ -3,52 +3,11 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-/* parse nptr into num.
- *
- * return false if nptr is invalid or overflow.
- * otherwise, return true.
- */
-static bool	my_atoi(const char *nptr, int *num)
-{
-	int				sign;
-
-	*num = 0;
-	sign = 1;
-	if (*nptr == '+' || *nptr == '-')
-		if (*nptr++ == '-')
-			sign = -1;
-	if (is_overflow(nptr, sign))
-		return (false);
-	while (*nptr)
-	{
-		if (ft_isdigit(*nptr))
-			*num = *num * 10 + (*nptr++ - '0');
-		else
-			return (false);
-	}
-	*num *= sign;
-	return (true);
-}
-
-static bool	parse_argv(t_dlist *dummy, char **argv)
-{
-	int	val;
-	int	i;
-
-	i = 0;
-	while (argv[i])
-	{
-		if (!my_atoi(argv[i], &val) || !dlist_add_prev(dummy, val))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 int	main(int argc, char **argv)
 {
 	t_dlist	*dummy_a;
 	t_dlist	*dummy_b;
+	t_dlist	*dummy_op;
 
 	if (argc <= 1)
 	{
@@ -57,12 +16,10 @@ int	main(int argc, char **argv)
 	}
 	dummy_a = create_dlist(0);
 	dummy_b = create_dlist(0);
-	// dummy_actions = create_dlist(0);
-	if (!dummy_a || !dummy_b || !parse_argv(dummy_a, argv + 1))
+	dummy_op = create_dlist(0);
+	if (!dummy_a || !dummy_b || !dummy_op || !parse_argv(dummy_a, argv + 1))
 	{
 		printf("nums are invalid or malloc() failed\n");
-		free_dlist(dummy_a);
-		free_dlist(dummy_b);
 		return (1);
 	}
 	printf("dummy_a has %d elements\n", dlist_len(dummy_a));

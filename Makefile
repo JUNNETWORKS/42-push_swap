@@ -7,10 +7,10 @@ LIBFT_MAKE := $(MAKE) -C $(LIBFT_PATH)
 LIBFT_LIB := -L./libft -lft
 
 HEADER_FILES := push_swap.h
-SRCS := main.c \
+SRCS := main.c parse_argv.c \
 		dlist.c dlist2.c dlist3.c \
 		operations.c \
-		sort_stacks.c sort_le_3_elements.c sort_le_6_elements.c is_stack_sorted.c \
+		sort_stacks.c sort_le_3_elements.c sort_le_6_elements.c sort_many_elements.c is_stack_sorted.c \
 		sort_arr.c
 OBJS := ${SRCS:.c=.o}
 DEPS := ${SRCS:.c=.d}
