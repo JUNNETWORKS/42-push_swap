@@ -18,7 +18,10 @@ int	main(int argc, char **argv)
 
 	init_stacks(&stacks);
 	if (argc <= 1 || !parse_argv(stacks.dummy_a, argv + 1))
+	{
+		ft_putendl_fd("Error", STDERR_FILENO);
 		return (1);
+	}
 #if DEBUG
 	printf("dummy_a has %d elements\n", dlist_len(stacks.dummy_a));
 	print_stacks(&stacks);
