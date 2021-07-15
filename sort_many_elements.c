@@ -79,7 +79,7 @@ static int merge_sorted_stacks(t_stacks *stacks, enum e_stacks src_stack_id)
 	while (dlist_len(dummy_src))
 	{
 		if (is_sorted_des)
-			dlist_rrotate(dummy_src);
+			stacks_rrotate(stacks, src_stack_id);
 		stacks_push2another(stacks, src_stack_id);
 		stacks_rotate(stacks, !src_stack_id);
 	}
