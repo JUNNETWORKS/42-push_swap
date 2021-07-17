@@ -111,15 +111,12 @@ static void	quick_sort_stack(t_stacks *stacks, int unsorted_len, enum e_stacks s
 	while (!(is_stack_sorted_des(stacks->dummy_b, dlist_len(stacks->dummy_b))
 			|| is_stack_sorted_asc(stacks->dummy_b, dlist_len(stacks->dummy_b))))
 	{
+		print_stacks(stacks);
 		pivot = dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b));
 		fprintf(stderr, "pivot (B to A): %d\n", pivot);
 		partition_stacks_if_lt_or_eq(stacks, STACK_B, pivot, dlist_len(stacks->dummy_b));
-		// pivotが上手く動いていない時はpivot-1を試す
-		if (dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b)) == pivot)
-			partition_stacks_if_lt_or_eq(stacks, STACK_B, pivot - 1, dlist_len(stacks->dummy_b));
 		if (dlist_len(stacks->dummy_b) <= 3)
 			sort_le_3_elements(stacks, STACK_B);
-		print_stacks(stacks);
 	}
 	fprintf(stderr, "finish sorting stack B\n");
 
@@ -128,7 +125,7 @@ static void	quick_sort_stack(t_stacks *stacks, int unsorted_len, enum e_stacks s
 	fprintf(stderr, "sorted_len: %d\n", sorted_len);
 	print_stacks(stacks);
 	fprintf(stderr, "next quick_sort_stack() will be started in 1 sec...\n");
-	usleep(0.1 * 1000 * 1000);
+	// usleep(0.1 * 1000 * 1000);
 	quick_sort_stack(stacks, unsorted_len - sorted_len, STACK_A);
 }
 
