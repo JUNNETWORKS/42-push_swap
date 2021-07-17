@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 #endif
 
 	sort_stacks(&stacks);
-	// optimize_operations(&stacks);
+	optimize_operations(&stacks);
 	print_all_operations(&stacks);
 
 #if DEBUG

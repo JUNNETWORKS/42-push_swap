@@ -27,7 +27,10 @@ void	optimize_operations(t_stacks *stacks)
 	while (current != stacks->dummy_ops)
 	{
 		if (!optimize_swaps(&current, new_dummy_ops))
+		{
+			dlist_add_prev(new_dummy_ops, current->val);
 			current = current->next;
+		}
 	}
 	free_dlist(stacks->dummy_ops);
 	stacks->dummy_ops = new_dummy_ops;
