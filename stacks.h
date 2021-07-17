@@ -1,10 +1,11 @@
 #ifndef STACKS_H
 # define STACKS_H
 
+# include <stdbool.h>
 # include "dlist.h"
 
 enum e_operations {
-	OP_SA = 0x0,
+	OP_SA = 0x10,
 	OP_SB,
 	OP_SS,
 	OP_PA,
@@ -43,5 +44,7 @@ void	sort_many_elements(t_stacks *stacks, enum e_stacks stack_id);
 bool	is_stack_sorted_asc(t_dlist *dummy, int len);
 bool	is_stack_sorted_des(t_dlist *dummy, int len);
 void	print_all_operations(t_stacks *stacks);
+
+void	optimize_operations(t_stacks *stacks);
 
 #endif

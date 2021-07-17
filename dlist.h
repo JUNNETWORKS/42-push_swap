@@ -1,6 +1,8 @@
 #ifndef DLIST_H
 # define DLIST_H
 
+# include <stdbool.h>
+
 /* t_dlist is used as stack
  *
  * dummy->next is top of stack
