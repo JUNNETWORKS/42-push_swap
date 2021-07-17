@@ -22,18 +22,14 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Error", STDERR_FILENO);
 		return (1);
 	}
-#if DEBUG
-	printf("dummy_a has %d elements\n", dlist_len(stacks.dummy_a));
+	fprintf(stderr, "dummy_a has %d elements\n", dlist_len(stacks.dummy_a));
 	print_stacks(&stacks);
-#endif
 
 	sort_stacks(&stacks);
 	optimize_operations(&stacks);
 	print_all_operations(&stacks);
 
-#if DEBUG
-	printf("\n---------- stacks has been sorted ----------\n\n");
+	fprintf(stderr, "\n---------- stacks has been sorted ----------\n\n");
 	print_stacks(&stacks);
-	printf("operations count: %d\n", dlist_len(stacks.dummy_ops));
-#endif
+	fprintf(stderr, "operations count: %d\n", dlist_len(stacks.dummy_ops));
 }
