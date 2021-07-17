@@ -34,7 +34,7 @@ static int	partition_stacks(t_stacks *stacks, enum e_stacks src_stack_id, int pi
 	return (adding_count);
 }
 
-static int	partition_stacks_if_lt(t_stacks *stacks, enum e_stacks src_stack_id, int pivot, int len)
+static int	partition_stacks_if_lt_or_eq(t_stacks *stacks, enum e_stacks src_stack_id, int pivot, int len)
 {
 	t_dlist *current;
 	t_dlist *next;
@@ -51,7 +51,7 @@ static int	partition_stacks_if_lt(t_stacks *stacks, enum e_stacks src_stack_id, 
 	while (i < len_src)
 	{
 		next = current->next;
-		if (i < len && current->val > pivot)
+		if (i < len && current->val >= pivot)
 		{
 			stacks_push2another(stacks, src_stack_id);
 			adding_count++;
@@ -113,10 +113,10 @@ static void	quick_sort_stack(t_stacks *stacks, int unsorted_len, enum e_stacks s
 	{
 		pivot = dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b));
 		fprintf(stderr, "pivot (B to A): %d\n", pivot);
-		partition_stacks_if_lt(stacks, STACK_B, pivot, dlist_len(stacks->dummy_b));
+		partition_stacks_if_lt_or_eq(stacks, STACK_B, pivot, dlist_len(stacks->dummy_b));
 		// pivotが上手く動いていない時はpivot-1を試す
 		if (dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b)) == pivot)
-			partition_stacks_if_lt(stacks, STACK_B, pivot - 1, dlist_len(stacks->dummy_b));
+			partition_stacks_if_lt_or_eq(stacks, STACK_B, pivot - 1, dlist_len(stacks->dummy_b));
 		if (dlist_len(stacks->dummy_b) <= 3)
 			sort_le_3_elements(stacks, STACK_B);
 		print_stacks(stacks);
