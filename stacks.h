@@ -27,6 +27,7 @@ typedef struct	s_stacks {
 	t_dlist	*dummy_a;
 	t_dlist	*dummy_b;
 	t_dlist	*dummy_ops;
+	int		sorted_val;
 }				t_stacks;
 
 t_dlist	*get_stack_from_id(t_stacks *stacks, enum e_stacks stack_id);

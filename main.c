@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 	fprintf(stderr, "dummy_a has %d elements\n", dlist_len(stacks.dummy_a));
 	print_stacks(&stacks);
 
+	dlist_at(stacks.dummy_a, dlist_get_min_val_idx(stacks.dummy_a), &stacks.sorted_val);
 	sort_stacks(&stacks);
 	optimize_operations(&stacks);
 	print_all_operations(&stacks);
