@@ -92,23 +92,23 @@ void	print_stacks(t_stacks *stacks)
 	{
 		if (len_a > 0 && len_a >= len_b)
 		{
-			fprintf(stderr, "|%4d|", current_a->val);
+			fprintf(stderr, "|%4d (%3d)|", current_a->val, current_a->group);
 			current_a = current_a->next;
 			len_a--;
 		}
 		else
-			fprintf(stderr, "|    |");
+			fprintf(stderr, "|          |");
 		fprintf(stderr, "  ");
 		if (len_b > 0 && len_b > len_a)
 		{
-			fprintf(stderr, "|%4d|", current_b->val);
+			fprintf(stderr, "|%4d (%3d)|", current_b->val, current_b->group);
 			current_b = current_b->next;
 			len_b--;
 		}
 		else
-			fprintf(stderr, "|    |");
+			fprintf(stderr, "|          |");
 		fprintf(stderr, "\n");
 	}
-	fprintf(stderr, " ̄ ̄ ̄ ̄ ̄ ̄   ̄ ̄ ̄ ̄ ̄ ̄\n");
-	fprintf(stderr, "  a       b   \n");
+	fprintf(stderr, " ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄   ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄\n");
+	fprintf(stderr, "      a           b   \n");
 }
