@@ -2,7 +2,7 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-static void	sort_2_elements(t_stacks *stacks, enum e_stacks stack_id)
+void	sort_2_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
 	int	value0;
 	int	value1;
@@ -17,7 +17,7 @@ static void	sort_2_elements(t_stacks *stacks, enum e_stacks stack_id)
 	}
 }
 
-static void	sort_3_elements(t_stacks *stacks, enum e_stacks stack_id)
+void	sort_3_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
 	t_dlist	*dummy;
 	int		value0;

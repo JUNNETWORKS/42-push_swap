@@ -12,13 +12,16 @@ static void	partition_stack_a(t_stacks *stacks)
 	t_dlist	*tmp;
 
 	group_len = get_head_group_len(stacks->dummy_a);
-	if (group_len <= 1)
+	if (group_len <= 2)
 	{
-		stacks_rotate(stacks, STACK_A);
+		if (group_len == 2)
+			sort_2_elements(stacks, STACK_A);
+		while (group_len-- > 0)
+			stacks_rotate(stacks, STACK_A);
 		return ;
 	}
 	pivot = dlist_get_mid_value(stacks->dummy_a, group_len);
-	fprintf(stderr, "pivot(a2b): %d (group: %d), unsorted_len: %d\n", pivot, stacks->dummy_a->next->group, group_len);
+	fprintf(stderr, "pivot(a2b): %d (group: %d), group_len: %d\n", pivot, stacks->dummy_a->next->group, group_len);
 	i = 0;
 	current = stacks->dummy_a->next;
 	while (i < group_len)
@@ -83,10 +86,14 @@ static void	quick_sort_stacks(t_stacks *stacks)
 	if (is_stack_sorted_asc(stacks->dummy_a, dlist_len(stacks->dummy_a)))
 		return ;
 	partition_stack_a(stacks);
+	fprintf(stderr, "\n----- partition_stack_a() finished -----\n");
 	print_stacks(stacks);
 	partition_stack_b_and_merge2a(stacks);
+	fprintf(stderr, "\n----- partition_stack_b_and_merge2a() finished -----\n");
 	print_stacks(stacks);
+#if DEBUG
 	sleep(1);
+#endif
 	quick_sort_stacks(stacks);
 }
 

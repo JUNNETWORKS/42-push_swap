@@ -41,6 +41,8 @@ void	stacks_rrotate(t_stacks *stacks, enum e_stacks stack_id);
 void	print_stacks(t_stacks *stacks);
 const char	*get_operation_str(enum e_operations op);
 void	sort_stacks(t_stacks *stacks);
+void	sort_2_elements(t_stacks *stacks, enum e_stacks stack_id);
+void	sort_3_elements(t_stacks *stacks, enum e_stacks stack_id);
 void	sort_le_3_elements(t_stacks *stacks, enum e_stacks stack_id);
 void	sort_le_6_elements(t_stacks *stacks, enum e_stacks stack_id);
 void	sort_many_elements(t_stacks *stacks, enum e_stacks stack_id);
