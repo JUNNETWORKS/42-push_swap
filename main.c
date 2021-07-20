@@ -29,7 +29,9 @@ int	main(int argc, char **argv)
 	dlist_at(stacks.dummy_a, dlist_get_min_val_idx(stacks.dummy_a), &stacks.next_val);
 	stacks.sorted_len = 0;
 	sort_stacks(&stacks);
+	fprintf(stderr, "before optimization: %d\n", dlist_len(stacks.dummy_ops));
 	optimize_operations(&stacks);
+	fprintf(stderr, "after optimization: %d\n", dlist_len(stacks.dummy_ops));
 	print_all_operations(&stacks);
 
 	fprintf(stderr, "\n---------- stacks has been sorted ----------\n\n");

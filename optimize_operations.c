@@ -46,6 +46,8 @@ static bool	remove_unneeded_operations(t_dlist **current, t_dlist *new_dummy_ops
 	(void)new_dummy_ops;
 	if (((*current)->val == OP_SA && (*current)->next->val == OP_SA)
 		|| ((*current)->val == OP_SB && (*current)->next->val == OP_SB)
+		|| ((*current)->val == OP_PA && (*current)->next->val == OP_PB)
+		|| ((*current)->val == OP_PB && (*current)->next->val == OP_PA)
 		|| ((*current)->val == OP_RA && (*current)->next->val == OP_RRA)
 		|| ((*current)->val == OP_RRA && (*current)->next->val == OP_RA)
 		|| ((*current)->val == OP_RB && (*current)->next->val == OP_RRB)
@@ -77,6 +79,12 @@ void	optimize_operations(t_stacks *stacks)
 			current = current->next;
 		}
 	}
+	if (dlist_len(new_dummy_ops) == dlist_len(stacks->dummy_ops))
+	{
+		free_dlist(new_dummy_ops);
+		return ;
+	}
 	free_dlist(stacks->dummy_ops);
 	stacks->dummy_ops = new_dummy_ops;
+	optimize_operations(stacks);
 }

@@ -21,13 +21,9 @@ void	sort_le_6_elements(t_stacks *stacks, enum e_stacks stack_id)
 		}
 		stacks_push2another(stacks, stack_id);
 	}
-#if DEBUG
 	print_stacks(stacks);
-#endif
 	sort_le_3_elements(stacks, stack_id);
-#if DEBUG
 	print_stacks(stacks);
-#endif
 	while (dlist_len(dummy_another))
 		stacks_push2another(stacks, !stack_id);
 }
