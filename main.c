@@ -37,4 +37,7 @@ int	main(int argc, char **argv)
 	fprintf(stderr, "\n---------- stacks has been sorted ----------\n\n");
 	print_stacks(&stacks);
 	fprintf(stderr, "operations count: %d\n", dlist_len(stacks.dummy_ops));
+	free_dlist(stacks.dummy_a);
+	free_dlist(stacks.dummy_b);
+	free_dlist(stacks.dummy_ops);
 }
