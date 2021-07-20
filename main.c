@@ -8,6 +8,7 @@ static void	init_stacks(t_stacks *stacks)
 	stacks->dummy_a = create_dlist(0);
 	stacks->dummy_b = create_dlist(0);
 	stacks->dummy_ops = create_dlist(0);
+	stacks->pivot_count = 0;
 	if (!(stacks->dummy_a && stacks->dummy_b && stacks->dummy_ops))
 		exit(1);
 }
@@ -26,6 +27,7 @@ int	main(int argc, char **argv)
 	print_stacks(&stacks);
 
 	dlist_at(stacks.dummy_a, dlist_get_min_val_idx(stacks.dummy_a), &stacks.next_val);
+	stacks.sorted_len = 0;
 	sort_stacks(&stacks);
 	optimize_operations(&stacks);
 	print_all_operations(&stacks);

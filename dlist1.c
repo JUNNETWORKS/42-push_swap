@@ -10,6 +10,7 @@ t_dlist	*create_dlist(int val)
 	if (!new)
 		return (NULL);
 	new->val = val;
+	new->group = -1;
 	new->next = new;
 	new->prev = new;
 	return (new);
@@ -23,6 +24,7 @@ t_dlist	*dlist_add_next(t_dlist *dummy, int val)
 	if (!new)
 		return (NULL);
 	new->val = val;
+	new->group = 0;
 	dummy->next->prev = new;
 	new->next = dummy->next;
 	new->prev = dummy;
@@ -38,6 +40,7 @@ t_dlist	*dlist_add_prev(t_dlist *dummy, int val)
 	if (!new)
 		return (NULL);
 	new->val = val;
+	new->group = 0;
 	dummy->prev->next = new;
 	new->prev = dummy->prev;
 	new->next = dummy;

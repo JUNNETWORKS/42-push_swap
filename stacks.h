@@ -28,6 +28,8 @@ typedef struct	s_stacks {
 	t_dlist	*dummy_b;
 	t_dlist	*dummy_ops;
 	int		next_val;
+	int		sorted_len;
+	int		pivot_count;  // 現在行われたB2Aのpivotの回数
 }				t_stacks;
 
 t_dlist	*get_stack_from_id(t_stacks *stacks, enum e_stacks stack_id);

@@ -10,6 +10,7 @@
  */
 typedef struct		s_dlist {
 	int				val;
+	int				group;  // この値が何回BからAに移動されたかを記録する. (for quick_sort)
 	struct s_dlist	*next;
 	struct s_dlist	*prev;
 }					t_dlist;
@@ -28,5 +29,6 @@ void	dlist_push(t_dlist *dummy, t_dlist *element);
 void	dlist_swap_first2(t_dlist *dummy);
 void	dlist_rotate(t_dlist *dummy);
 void	dlist_rrotate(t_dlist *dummy);
+int		get_head_group_len(t_dlist *dummy);
 
 #endif
