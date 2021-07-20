@@ -99,14 +99,44 @@ void	dfs(t_stacks *stacks, t_dlist *dummy_ops, int *best_turn, int turn)
 
 void	sort_le_6_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
+	/*
 	int		best_turn;
 	t_dlist	*dummy_ops_tmp;
 
-	(void)stack_id;
 	best_turn = 12;
 	dummy_ops_tmp = create_dlist(0);
 	if (!dummy_ops_tmp)
 		exit(1);
 	dfs(stacks, dummy_ops_tmp, &best_turn, 0);
 	free_dlist(dummy_ops_tmp);
+	*/
+	int pivot;
+	int i;
+	int len;
+	t_dlist *current;
+	t_dlist *next;
+
+	(void)stack_id;
+	i = 0;
+	len = dlist_len(stacks->dummy_a);
+	pivot = dlist_get_mid_value(stacks->dummy_a, len);
+	current = stacks->dummy_a->next;
+	while (i < len)
+	{
+		next = current->next;
+		if (current->val >= pivot)
+			stacks_push2another(stacks, STACK_A);
+		else
+			stacks_rotate(stacks, STACK_A);
+		current = next;
+		i++;
+	}
+	sort_le_3_elements(stacks, STACK_A);
+	sort_le_3_elements(stacks, STACK_B);
+	print_stacks(stacks);
+	while (dlist_len(stacks->dummy_b))
+	{
+		stacks_push2another(stacks, STACK_B);
+		stacks_rotate(stacks, STACK_A);
+	}
 }
