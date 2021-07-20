@@ -16,6 +16,7 @@ do
 
   # check if operations is correct
   set +e
+  echo "${i}: ${ARG}"
   ./push_swap $ARG 2>/dev/null | ./checker_linux $ARG
   IS_OK=$?
   set -e

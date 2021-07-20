@@ -6,16 +6,16 @@
 
 enum e_operations {
 	OP_SA = 0x10,
-	OP_SB,
-	OP_SS,
-	OP_PA,
-	OP_PB,
-	OP_RA,
-	OP_RB,
-	OP_RR,
-	OP_RRA,
-	OP_RRB,
-	OP_RRR
+	OP_SB = 0x11,
+	OP_SS = 0x12,
+	OP_PA = 0x13,
+	OP_PB = 0x14,
+	OP_RA = 0x15,
+	OP_RB = 0x16,
+	OP_RR = 0x17,
+	OP_RRA = 0x18,
+	OP_RRB = 0x19,
+	OP_RRR = 0x1a
 };
 
 enum e_stacks{
