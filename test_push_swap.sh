@@ -8,7 +8,7 @@ ARG_NUM="${1:-100}"
 MAX=0
 SUM=0
 MIN=1000000000
-TEST_NUM=100
+TEST_NUM="${2:-10}"
 
 for i in $(seq 1 "$TEST_NUM")
 do
