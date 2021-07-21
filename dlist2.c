@@ -23,6 +23,18 @@ bool	dlist_at(t_dlist *dummy, int idx, int *val)
 	return (false);
 }
 
+void	dlist_del_prev(t_dlist *dummy)
+{
+	t_dlist	*current;
+
+	current = dummy->prev;
+	if (current == dummy)
+		return ;
+	current->prev->next = current->next;
+	current->next->prev = current->prev;
+	free(current);
+}
+
 int	dlist_get_min_val_idx(t_dlist *dummy)
 {
 	int		i;

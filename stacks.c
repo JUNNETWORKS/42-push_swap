@@ -34,5 +34,5 @@ const char	*get_operation_str(enum e_operations op)
 		return (ft_strdup("rrb"));
 	else if (op == OP_RRR)
 		return (ft_strdup("rrr"));
-	return ft_strdup("unknown operation");
+	return (ft_strdup("unknown operation"));
 }

@@ -48,4 +48,3 @@ void	sort_arr(int *arr, int n)
 {
 	quick_sort(arr, 0, n - 1);
 }
-

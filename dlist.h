@@ -7,10 +7,13 @@
  *
  * dummy->next is top of stack
  * dummy->prev is bottom of stack
+ *
+ * group: この値が何回BからAに移動されたかを記録する.
+ *   (for quick_sort)
  */
-typedef struct		s_dlist {
+typedef struct s_dlist {
 	int				val;
-	int				group;  // この値が何回BからAに移動されたかを記録する. (for quick_sort)
+	int				group;
 	struct s_dlist	*next;
 	struct s_dlist	*prev;
 }					t_dlist;

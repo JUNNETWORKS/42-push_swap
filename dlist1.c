@@ -77,15 +77,3 @@ void	free_dlist(t_dlist *dummy)
 	}
 	free(dummy);
 }
-
-void	dlist_del_prev(t_dlist *dummy)
-{
-	t_dlist	*current;
-
-	current = dummy->prev;
-	if (current == dummy)
-		return ;
-	current->prev->next = current->next;
-	current->next->prev = current->prev;
-	free(current);
-}

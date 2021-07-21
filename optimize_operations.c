@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "utils.h"
 #include "dlist.h"
 #include "stacks.h"
 
@@ -41,7 +42,8 @@ static bool	optimize_rrotate(t_dlist **current, t_dlist *new_dummy_ops)
 	return (false);
 }
 
-static bool	remove_unneeded_operations(t_dlist **current, t_dlist *new_dummy_ops)
+static bool	remove_unneeded_operations(
+	t_dlist **current, t_dlist *new_dummy_ops)
 {
 	(void)new_dummy_ops;
 	if (((*current)->val == OP_SA && (*current)->next->val == OP_SA)
@@ -65,8 +67,7 @@ void	optimize_operations(t_stacks *stacks)
 	t_dlist	*new_dummy_ops;
 
 	new_dummy_ops = create_dlist(0);
-	if (!new_dummy_ops)
-		exit(1);
+	exit_if_null(1, new_dummy_ops);
 	current = stacks->dummy_ops->next;
 	while (current != stacks->dummy_ops)
 	{

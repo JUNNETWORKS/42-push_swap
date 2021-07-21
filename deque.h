@@ -1,5 +1,5 @@
-#ifndef DEQUE
-# define DEQUE
+#ifndef DEQUE_H
+# define DEQUE_H
 
 # include <stdbool.h>
 # include "dlist.h"
@@ -9,7 +9,7 @@
  * [_, _, 1,    2,   _,   _, _]
  *       head       tail
  */
-typedef struct {
+typedef struct s_deque {
 	long	*arr;
 	long	cap;
 	long	head_idx;

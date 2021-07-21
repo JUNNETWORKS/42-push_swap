@@ -36,7 +36,6 @@ void	dlist_swap_first2(t_dlist *dummy)
 		return ;
 	first = dummy->next;
 	second = first->next;
-
 	dummy->next = second;
 	second->prev = dummy;
 	first->prev = second;

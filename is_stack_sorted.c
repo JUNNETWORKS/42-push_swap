@@ -1,12 +1,11 @@
 #include <stdbool.h>
 #include "push_swap.h"
 
-
 bool	is_stack_sorted_asc(t_dlist *dummy, int len)
 {
-	t_dlist *current;
-	int max;
-	int i;
+	t_dlist	*current;
+	int		max;
+	int		i;
 
 	current = dummy->next;
 	max = current->val;
@@ -26,9 +25,9 @@ bool	is_stack_sorted_asc(t_dlist *dummy, int len)
 
 bool	is_stack_sorted_des(t_dlist *dummy, int len)
 {
-	t_dlist *current;
-	int min;
-	int i;
+	t_dlist	*current;
+	int		min;
+	int		i;
 
 	current = dummy->next;
 	min = current->val;
