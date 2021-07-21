@@ -2,9 +2,9 @@
 
 int	get_head_group_len(t_dlist *dummy)
 {
-	t_dlist *current;
-	int group;
-	int group_len;
+	t_dlist	*current;
+	int		group;
+	int		group_len;
 
 	current = dummy->next;
 	group = current->group;

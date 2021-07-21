@@ -71,9 +71,9 @@ int	*dlist2arr(t_dlist *dummy)
 
 int	dlist_get_mid_value(t_dlist *dummy, int len)
 {
-	int	*arr;
-	int	mid_v;
-	int	i;
+	int		*arr;
+	int		mid_v;
+	int		i;
 	t_dlist	*current;
 
 	arr = malloc(sizeof(int) * len);
