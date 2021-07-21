@@ -49,7 +49,8 @@ static void	push_b2a(t_stacks *stacks, int new_group)
 
 static void	partition_stack_b_and_merge2a(t_stacks *stacks)
 {
-	int pivot;
+	int		pivot;
+	int		i;
 	t_dlist	*current;
 	t_dlist	*tmp;
 
@@ -60,7 +61,7 @@ static void	partition_stack_b_and_merge2a(t_stacks *stacks)
 		stacks->pivot_count++;
 		fprintf(stderr, "pivot(b2a): %d, pivot_count: %d\n", pivot, stacks->pivot_count);
 		current = stacks->dummy_b->next;
-		int i = dlist_len(stacks->dummy_b);
+		i = dlist_len(stacks->dummy_b);
 		while (i-- > 0)
 		{
 			tmp = current->next;
