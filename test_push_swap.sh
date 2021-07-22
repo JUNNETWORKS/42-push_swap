@@ -16,11 +16,11 @@ do
 
   # check if operations is correct
   set +e
-  echo "${i}: ${ARG}"
-  ./push_swap $ARG 2>/dev/null | ./checker_linux $ARG
-  IS_OK=$?
+  echo "${i}: $(echo $ARG | tr '\n' ' ')"
+  CHEKCER_RESULT=$(./push_swap $ARG 2>/dev/null | ./checker_linux $ARG | tail -n 1)
   set -e
-  if [ $IS_OK -ne 0 ]
+  echo "CHEKCER_RESULT: $CHEKCER_RESULT"
+  if [[ "$CHEKCER_RESULT" != "OK" ]]
   then
     echo "operations isn't correct!"
     echo "ARG=\"${ARG}\""

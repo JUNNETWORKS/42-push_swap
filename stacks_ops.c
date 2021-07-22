@@ -2,6 +2,13 @@
 #include "libft/libft.h"
 #include "stacks.h"
 
+static void print_last_operation(t_stacks *stacks)
+{
+	const char *str = get_operation_str(stacks->dummy_ops->prev->val);
+	fprintf(stderr, "%s\n", str);
+	free((void *)str);
+}
+
 /*
  * Take the first element at the top of b and put it at the top of a.
  * Do nothing if b is empty.

@@ -26,7 +26,8 @@ int	main(int argc, char **argv)
 	fprintf(stderr, "dummy_a has %d elements\n", dlist_len(stacks.dummy_a));
 	print_stacks(&stacks);
 
-	dlist_at(stacks.dummy_a, dlist_get_min_val_idx(stacks.dummy_a), &stacks.next_val);
+	stacks.sorted_arr = dlist2arr(stacks.dummy_a);
+	stacks.size = dlist_len(stacks.dummy_a);
 	stacks.sorted_len = 0;
 	sort_stacks(&stacks);
 	fprintf(stderr, "before optimization: %d\n", dlist_len(stacks.dummy_ops));
@@ -40,4 +41,5 @@ int	main(int argc, char **argv)
 	free_dlist(stacks.dummy_a);
 	free_dlist(stacks.dummy_b);
 	free_dlist(stacks.dummy_ops);
+	free(stacks.sorted_arr);
 }

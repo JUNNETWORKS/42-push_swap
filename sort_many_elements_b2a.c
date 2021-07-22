@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <unistd.h>
+#include "libft/libft.h"
+#include "stacks.h"
+
+static void	push_b2a(t_stacks *stacks, int new_group)
+{
+	stacks->dummy_b->next->group = new_group;
+	stacks_push2another(stacks, STACK_B);
+}
+
+void	partition_stack_b_and_merge2a(t_stacks *stacks)
+{
+	int		pivot;
+	int		i;
+	t_dlist	*current;
+	t_dlist	*tmp;
+
+	while (!is_stack_sorted_asc(stacks->dummy_b, dlist_len(stacks->dummy_b))
+		&& dlist_len(stacks->dummy_b) > 3)
+	{
+		pivot = dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b));
+		stacks->pivot_count++;
+		fprintf(stderr, "pivot(b2a): %d, pivot_count: %d\n", pivot, stacks->pivot_count);
+		current = stacks->dummy_b->next;
+		i = dlist_len(stacks->dummy_b);
+		while (i-- > 0)
+		{
+			tmp = current->next;
+			if (current->val > pivot)
+				push_b2a(stacks, stacks->pivot_count);
+			else
+				stacks_rotate(stacks, STACK_B);
+			current = tmp;
+		}
+		print_stacks(stacks);
+	}
+	if (dlist_len(stacks->dummy_b) <= 3)
+		sort_le_3_elements(stacks, STACK_B);
+	while (dlist_len(stacks->dummy_b))
+	{
+		push_b2a(stacks, stacks->pivot_count);
+		stacks_rotate(stacks, STACK_A);
+		stacks->sorted_len++;
+	}
+}
