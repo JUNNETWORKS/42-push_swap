@@ -44,6 +44,7 @@ void	sort_stack_dfs(t_stacks *stacks, t_dfs *dfs_data, enum e_stacks stack_id, i
 void	sort_le_6_elements(t_stacks *stacks, enum e_stacks stack_id)
 {
 	t_dfs	dfs_data;
+	t_dlist	*current;
 
 	dfs_data.best_turn = 12;
 	dfs_data.dummy_ops = create_dlist(0);
@@ -52,19 +53,13 @@ void	sort_le_6_elements(t_stacks *stacks, enum e_stacks stack_id)
 	if (!dfs_data.dummy_tmp_ops)
 		exit(1);
 	sort_stack_dfs(stacks, &dfs_data, stack_id, 0);
+	current = dfs_data.dummy_ops->next;
+	while (current != dfs_data.dummy_ops)
+	{
+		do_operation(stacks, NULL, current->val);
+		current = current->next;
+	}
 	dlist_concat_prev(stacks->dummy_ops, dfs_data.dummy_ops);
 	free_dlist(dfs_data.dummy_tmp_ops);
 	free_dlist(dfs_data.dummy_ops);
-
-	// デバッグ用
-	// t_dlist	*current;
-	// current = stacks->dummy_ops->next;
-	// while (current != stacks->dummy_ops)
-	// {
-	// 	do_operation(stacks, NULL, current->val);
-	// 	const char *str = get_operation_str(current->val);
-	// 	fprintf(stderr, "%s\n", str);
-	// 	free((void *)str);
-	// 	current = current->next;
-	// }
 }
