@@ -103,3 +103,21 @@ int	dlist_get_mid_value(t_dlist *dummy, int len)
 	free(arr);
 	return (mid_v);
 }
+
+int	dlist_get_min_value(t_dlist *dummy, int len)
+{
+	int		min_v;
+	int		i;
+	t_dlist	*current;
+
+	i = 0;
+	min_v = INT_MAX;
+	current = dummy->next;
+	while (current != dummy && i++ < len)
+	{
+		if (current->val < min_v)
+			min_v = current->val;
+		current = current->next;
+	}
+	return (min_v);
+}
