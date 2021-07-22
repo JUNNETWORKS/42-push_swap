@@ -19,9 +19,11 @@ void	stacks_push2another(t_stacks *stacks, enum e_stacks src_stack_id)
 		return ;
 	dlist_push(dummy_dst, top);
 	if (src_stack_id == STACK_A)
-		dlist_add_prev(stacks->dummy_ops, OP_PB);
+		dlist_add_prev(stacks->dummy_ops, OP_PB, 0);
 	else
-		dlist_add_prev(stacks->dummy_ops, OP_PA);
+		dlist_add_prev(stacks->dummy_ops, OP_PA, 0);
+
+	print_last_operation(stacks);
 }
 
 void	stacks_swap(t_stacks *stacks, enum e_stacks stack_id)
@@ -31,9 +33,11 @@ void	stacks_swap(t_stacks *stacks, enum e_stacks stack_id)
 	dummy = get_stack_from_id(stacks, stack_id);
 	dlist_swap_first2(dummy);
 	if (stack_id == STACK_A)
-		dlist_add_prev(stacks->dummy_ops, OP_SA);
+		dlist_add_prev(stacks->dummy_ops, OP_SA, 0);
 	else
-		dlist_add_prev(stacks->dummy_ops, OP_SB);
+		dlist_add_prev(stacks->dummy_ops, OP_SB, 0);
+
+	print_last_operation(stacks);
 }
 
 void	stacks_rotate(t_stacks *stacks, enum e_stacks stack_id)
@@ -43,9 +47,11 @@ void	stacks_rotate(t_stacks *stacks, enum e_stacks stack_id)
 	dummy = get_stack_from_id(stacks, stack_id);
 	dlist_rotate(dummy);
 	if (stack_id == STACK_A)
-		dlist_add_prev(stacks->dummy_ops, OP_RA);
+		dlist_add_prev(stacks->dummy_ops, OP_RA, 0);
 	else
-		dlist_add_prev(stacks->dummy_ops, OP_RB);
+		dlist_add_prev(stacks->dummy_ops, OP_RB, 0);
+
+	print_last_operation(stacks);
 }
 
 void	stacks_rrotate(t_stacks *stacks, enum e_stacks stack_id)
@@ -55,9 +61,11 @@ void	stacks_rrotate(t_stacks *stacks, enum e_stacks stack_id)
 	dummy = get_stack_from_id(stacks, stack_id);
 	dlist_rrotate(dummy);
 	if (stack_id == STACK_A)
-		dlist_add_prev(stacks->dummy_ops, OP_RRA);
+		dlist_add_prev(stacks->dummy_ops, OP_RRA, 0);
 	else
-		dlist_add_prev(stacks->dummy_ops, OP_RRB);
+		dlist_add_prev(stacks->dummy_ops, OP_RRB, 0);
+
+	print_last_operation(stacks);
 }
 
 void	print_all_operations(t_stacks *stacks)

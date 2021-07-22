@@ -8,7 +8,7 @@ static bool	optimize_swaps(t_dlist **current, t_dlist *new_dummy_ops)
 	if (((*current)->val == OP_SA && (*current)->next->val == OP_SB)
 		|| ((*current)->val == OP_SB && (*current)->next->val == OP_SA))
 	{
-		if (!dlist_add_prev(new_dummy_ops, OP_SS))
+		if (!dlist_add_prev(new_dummy_ops, OP_SS, 0))
 			exit(1);
 		*current = (*current)->next->next;
 		return (true);
@@ -21,7 +21,7 @@ static bool	optimize_rotate(t_dlist **current, t_dlist *new_dummy_ops)
 	if (((*current)->val == OP_RA && (*current)->next->val == OP_RB)
 		|| ((*current)->val == OP_RB && (*current)->next->val == OP_RA))
 	{
-		if (!dlist_add_prev(new_dummy_ops, OP_RR))
+		if (!dlist_add_prev(new_dummy_ops, OP_RR, 0))
 			exit(1);
 		*current = (*current)->next->next;
 		return (true);
@@ -34,7 +34,7 @@ static bool	optimize_rrotate(t_dlist **current, t_dlist *new_dummy_ops)
 	if (((*current)->val == OP_RRA && (*current)->next->val == OP_RRB)
 		|| ((*current)->val == OP_RRB && (*current)->next->val == OP_RRA))
 	{
-		if (!dlist_add_prev(new_dummy_ops, OP_RRR))
+		if (!dlist_add_prev(new_dummy_ops, OP_RRR, 0))
 			exit(1);
 		*current = (*current)->next->next;
 		return (true);
@@ -76,7 +76,7 @@ void	optimize_operations(t_stacks *stacks)
 			&& !optimize_rotate(&current, new_dummy_ops)
 			&& !optimize_rrotate(&current, new_dummy_ops))
 		{
-			dlist_add_prev(new_dummy_ops, current->val);
+			dlist_add_prev(new_dummy_ops, current->val, current->group);
 			current = current->next;
 		}
 	}

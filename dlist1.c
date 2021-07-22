@@ -16,7 +16,7 @@ t_dlist	*create_dlist(int val)
 	return (new);
 }
 
-t_dlist	*dlist_add_next(t_dlist *dummy, int val)
+t_dlist	*dlist_add_next(t_dlist *dummy, int val, int group)
 {
 	t_dlist	*new;
 
@@ -24,7 +24,7 @@ t_dlist	*dlist_add_next(t_dlist *dummy, int val)
 	if (!new)
 		exit(1);
 	new->val = val;
-	new->group = 0;
+	new->group = group;
 	dummy->next->prev = new;
 	new->next = dummy->next;
 	new->prev = dummy;
@@ -32,7 +32,7 @@ t_dlist	*dlist_add_next(t_dlist *dummy, int val)
 	return (new);
 }
 
-t_dlist	*dlist_add_prev(t_dlist *dummy, int val)
+t_dlist	*dlist_add_prev(t_dlist *dummy, int val, int group)
 {
 	t_dlist	*new;
 
@@ -40,7 +40,7 @@ t_dlist	*dlist_add_prev(t_dlist *dummy, int val)
 	if (!new)
 		exit(1);
 	new->val = val;
-	new->group = 0;
+	new->group = group;
 	dummy->prev->next = new;
 	new->prev = dummy->prev;
 	new->next = dummy;

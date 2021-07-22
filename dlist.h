@@ -19,8 +19,8 @@ typedef struct s_dlist {
 }					t_dlist;
 
 t_dlist	*create_dlist(int val);
-t_dlist	*dlist_add_next(t_dlist *dummy, int val);
-t_dlist	*dlist_add_prev(t_dlist *dummy, int val);
+t_dlist	*dlist_add_next(t_dlist *dummy, int val, int group);
+t_dlist	*dlist_add_prev(t_dlist *dummy, int val, int group);
 int		dlist_len(t_dlist *dummy);
 void	free_dlist(t_dlist *dummy);
 void	dlist_del_prev(t_dlist *dummy);
@@ -28,6 +28,7 @@ bool	dlist_at(t_dlist *dummy, int idx, int *val);
 int		dlist_get_min_val_idx(t_dlist *dummy);
 int		*dlist2arr(t_dlist *dummy);
 t_dlist	*dlist_duplicate(t_dlist *dummy_src);
+t_dlist	*dlist_concat_prev(t_dlist *dummy_dst, t_dlist *dummy_src);
 int		dlist_get_mid_value(t_dlist *dummy, int len);
 int		dlist_get_min_value(t_dlist *dummy, int len);
 t_dlist	*dlist_pop(t_dlist *dummy);

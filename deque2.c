@@ -45,7 +45,7 @@ t_dlist	*deque2dlist(t_deque *deque)
 	i = deque->head_idx;
 	while (i != deque->tail_idx)
 	{
-		dlist_add_prev(dummy, deque->arr[i]);
+		dlist_add_prev(dummy, deque->arr[i], 0);
 		i = mod(i + 1, deque->cap);
 	}
 	return (dummy);

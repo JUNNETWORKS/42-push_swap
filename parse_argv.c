@@ -54,7 +54,7 @@ bool	parse_argv(t_dlist *dummy_a, char **argv)
 	{
 		if (!my_atoi(argv[i], &val)
 			|| is_duplicated(dummy_a, val)
-			|| !dlist_add_prev(dummy_a, val))
+			|| !dlist_add_prev(dummy_a, val, 0))
 			return (false);
 		i++;
 	}
