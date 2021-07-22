@@ -22,7 +22,7 @@ t_dlist	*dlist_add_next(t_dlist *dummy, int val)
 
 	new = malloc(sizeof(t_dlist));
 	if (!new)
-		return (NULL);
+		exit(1);
 	new->val = val;
 	new->group = 0;
 	dummy->next->prev = new;
@@ -38,7 +38,7 @@ t_dlist	*dlist_add_prev(t_dlist *dummy, int val)
 
 	new = malloc(sizeof(t_dlist));
 	if (!new)
-		return (NULL);
+		exit(1);
 	new->val = val;
 	new->group = 0;
 	dummy->prev->next = new;
