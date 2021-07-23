@@ -1,7 +1,8 @@
 #include "libft/libft.h"
 #include "stacks.h"
 
-void	undo_operation(t_stacks *stacks, t_dlist *dummy_ops, enum e_operations op)
+void	undo_operation(t_stacks *stacks,
+	t_dlist *dummy_ops, enum e_operations op)
 {
 	if (dummy_ops)
 		dlist_del_prev(dummy_ops);
@@ -23,7 +24,8 @@ void	undo_operation(t_stacks *stacks, t_dlist *dummy_ops, enum e_operations op)
 		dlist_rotate(stacks->dummy_b);
 }
 
-void	do_operation(t_stacks *stacks, t_dlist *dummy_ops, enum e_operations op)
+void	do_operation(t_stacks *stacks,
+	t_dlist *dummy_ops, enum e_operations op)
 {
 	if (dummy_ops)
 		dlist_add_prev(dummy_ops, op, 0);
@@ -45,7 +47,8 @@ void	do_operation(t_stacks *stacks, t_dlist *dummy_ops, enum e_operations op)
 		dlist_rrotate(stacks->dummy_b);
 }
 
-bool	is_valid_operation(t_stacks *stacks, t_dlist *dummy_ops, enum e_operations op)
+bool	is_valid_operation(t_stacks *stacks,
+	t_dlist *dummy_ops, enum e_operations op)
 {
 	if ((op == OP_SA && dummy_ops->prev->val == OP_SA)
 		|| (op == OP_SB && dummy_ops->prev->val == OP_SB)

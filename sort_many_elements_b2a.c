@@ -19,7 +19,8 @@ void	partition_stack_b_and_merge2a(t_stacks *stacks)
 	while (!is_stack_sorted_asc(stacks->dummy_b, dlist_len(stacks->dummy_b))
 		&& dlist_len(stacks->dummy_b) > 6)
 	{
-		pivot = dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b));
+		pivot = dlist_get_mid_value(stacks->dummy_b,
+			dlist_len(stacks->dummy_b));
 		stacks->pivot_count++;
 		fprintf(stderr, "pivot(b2a): %d, pivot_count: %d\n", pivot, stacks->pivot_count);
 		current = stacks->dummy_b->next;

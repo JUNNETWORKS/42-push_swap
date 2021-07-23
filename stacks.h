@@ -33,7 +33,7 @@ typedef struct s_stacks {
 	int			pivot_count;
 }				t_stacks;
 
-typedef struct	s_dfs {
+typedef struct s_dfs {
 	t_dlist		*dummy_tmp_ops;
 	t_dlist		*dummy_ops;
 	int			best_turn;
@@ -67,8 +67,11 @@ bool		is_stack_sorted_des(t_dlist *dummy, int len);
 void		optimize_operations(t_stacks *stacks);
 const char	*get_operation_str(enum e_operations op);
 void		print_all_operations(t_stacks *stacks);
-void		undo_operation(t_stacks *stacks, t_dlist *dummy_ops, enum e_operations op);
-void		do_operation(t_stacks *stacks, t_dlist *dummy_ops, enum e_operations op);
-bool		is_valid_operation(t_stacks *stacks, t_dlist *dummy_ops, enum e_operations op);
+void		undo_operation(t_stacks *stacks,
+				t_dlist *dummy_ops, enum e_operations op);
+void		do_operation(t_stacks *stacks,
+				t_dlist *dummy_ops, enum e_operations op);
+bool		is_valid_operation(t_stacks *stacks,
+				t_dlist *dummy_ops, enum e_operations op);
 
 #endif

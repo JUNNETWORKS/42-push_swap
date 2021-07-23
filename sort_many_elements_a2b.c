@@ -5,9 +5,9 @@
 
 void	partition_stack_a(t_stacks *stacks)
 {
-	int pivot;
-	int group_len;
-	int i;
+	int		pivot;
+	int		group_len;
+	int		i;
 	t_dlist	*current;
 	t_dlist	*tmp;
 

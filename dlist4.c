@@ -49,3 +49,25 @@ t_dlist	*dlist_concat_prev(t_dlist *dummy_dst, t_dlist *dummy_src)
 	free(dummy_src_copy);
 	return (dummy_dst);
 }
+
+int	*dlist2arr(t_dlist *dummy)
+{
+	int		*arr;
+	int		len;
+	int		i;
+	t_dlist	*current;
+
+	len = dlist_len(dummy);
+	arr = malloc(sizeof(int) * len);
+	if (!arr)
+		return (NULL);
+	i = 0;
+	current = dummy->next;
+	while (i < len)
+	{
+		arr[i] = current->val;
+		i++;
+		current = current->next;
+	}
+	return (arr);
+}

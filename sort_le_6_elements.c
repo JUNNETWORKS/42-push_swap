@@ -5,10 +5,21 @@
 #include "libft/libft.h"
 #include "stacks.h"
 
-void	sort_stack_dfs(t_stacks *stacks, t_dfs *dfs_data, enum e_stacks stack_id, int turn)
+static void	update_dummy_ops(t_dfs *dfs_data, int turn)
+{
+	t_dlist				*dummy_old;
+
+	dfs_data->best_turn = turn;
+	dummy_old = dfs_data->dummy_ops;
+	dfs_data->dummy_ops = dlist_duplicate(dfs_data->dummy_tmp_ops);
+	free_dlist(dummy_old);
+	fprintf(stderr, "best_turn: %d\n", dfs_data->best_turn);
+}
+
+void	sort_stack_dfs(t_stacks *stacks,
+	t_dfs *dfs_data, enum e_stacks stack_id, int turn)
 {
 	enum e_operations	op;
-	t_dlist				*dummy_old;
 	t_dlist				*dummy_stack;
 
 	if (turn >= dfs_data->best_turn)
@@ -16,25 +27,17 @@ void	sort_stack_dfs(t_stacks *stacks, t_dfs *dfs_data, enum e_stacks stack_id, i
 	dummy_stack = get_stack_from_id(stacks, stack_id);
 	if (dlist_len(dummy_stack) == dfs_data->stack_size
 		&& is_stack_sorted_asc(dummy_stack, dlist_len(dummy_stack)))
-	{
-		dfs_data->best_turn = turn;
-		dummy_old = dfs_data->dummy_ops;
-		dfs_data->dummy_ops = dlist_duplicate(dfs_data->dummy_tmp_ops);
-		free_dlist(dummy_old);
-		fprintf(stderr, "best_turn: %d\n", dfs_data->best_turn);
-		// print_all_operations(dfs_data);
-		return ;
-	}
+		return (update_dummy_ops(dfs_data, turn));
 	op = OP_SA - 1;
 	while (++op <= OP_RRR)
 	{
 		if (!is_valid_operation(stacks, dfs_data->dummy_tmp_ops, op))
-			continue;
+			continue ;
 		// 自分のスタック(stack_id)ではないスタックのデータは変更しない
 		if (op == OP_RR || op == OP_RRR || op == OP_SS
 			|| (stack_id == STACK_A && (op == OP_RB || op == OP_RRB || op == OP_SB || (dfs_data->push2another_count == 0 && op == OP_PA)))
 			|| (stack_id == STACK_B && (op == OP_RA || op == OP_RRA || op == OP_SA || (dfs_data->push2another_count == 0 && op == OP_PB))))
-			continue;
+			continue ;
 		do_operation(stacks, dfs_data->dummy_tmp_ops, op);
 		if ((stack_id == STACK_A && op == OP_PB) || (stack_id == STACK_B && op == OP_PA))
 			dfs_data->push2another_count++;

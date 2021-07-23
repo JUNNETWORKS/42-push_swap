@@ -59,28 +59,6 @@ int	dlist_get_min_val_idx(t_dlist *dummy)
 	return (min_idx);
 }
 
-int	*dlist2arr(t_dlist *dummy)
-{
-	int		*arr;
-	int		len;
-	int		i;
-	t_dlist	*current;
-
-	len = dlist_len(dummy);
-	arr = malloc(sizeof(int) * len);
-	if (!arr)
-		return (NULL);
-	i = 0;
-	current = dummy->next;
-	while (i < len)
-	{
-		arr[i] = current->val;
-		i++;
-		current = current->next;
-	}
-	return (arr);
-}
-
 int	dlist_get_mid_value(t_dlist *dummy, int len)
 {
 	int		*arr;

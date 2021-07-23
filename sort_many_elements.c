@@ -17,9 +17,6 @@ static void	quick_sort_stacks(t_stacks *stacks)
 	partition_stack_b_and_merge2a(stacks);
 	fprintf(stderr, "\n----- partition_stack_b_and_merge2a() finished (%+d) -----\n", dlist_len(stacks->dummy_ops) - old_ops_count);
 	print_stacks(stacks);
-#if DEBUG
-	sleep(1);
-#endif
 	quick_sort_stacks(stacks);
 }
 
