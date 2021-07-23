@@ -17,7 +17,7 @@ void	partition_stack_b_and_merge2a(t_stacks *stacks)
 	t_dlist	*tmp;
 
 	while (!is_stack_sorted_asc(stacks->dummy_b, dlist_len(stacks->dummy_b))
-		&& dlist_len(stacks->dummy_b) > 3)
+		&& dlist_len(stacks->dummy_b) > 6)
 	{
 		pivot = dlist_get_mid_value(stacks->dummy_b, dlist_len(stacks->dummy_b));
 		stacks->pivot_count++;
@@ -35,8 +35,10 @@ void	partition_stack_b_and_merge2a(t_stacks *stacks)
 		}
 		print_stacks(stacks);
 	}
-	if (dlist_len(stacks->dummy_b) <= 3)
-		sort_le_3_elements(stacks, STACK_B);
+	if (dlist_len(stacks->dummy_b) <= 6)
+		sort_le_6_elements(stacks, STACK_B);
+	stacks->pivot_count++;
+	print_stacks(stacks);
 	while (dlist_len(stacks->dummy_b))
 	{
 		push_b2a(stacks, stacks->pivot_count);
