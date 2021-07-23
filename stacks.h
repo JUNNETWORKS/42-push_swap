@@ -38,6 +38,7 @@ typedef struct	s_dfs {
 	t_dlist		*dummy_ops;
 	int			best_turn;
 	int			stack_size;
+	int			push2another_count;
 }				t_dfs;
 
 /* stacks */
