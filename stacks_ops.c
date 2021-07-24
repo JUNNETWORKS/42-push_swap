@@ -2,9 +2,10 @@
 #include "libft/libft.h"
 #include "stacks.h"
 
-static void print_last_operation(t_stacks *stacks)
+static void	print_last_operation(t_stacks *stacks)
 {
-	const char *str = get_operation_str(stacks->dummy_ops->prev->val);
+	const char	*str;
+	str = get_operation_str(stacks->dummy_ops->prev->val);
 	fprintf(stderr, "%s\n", str);
 	free((void *)str);
 }
@@ -29,7 +30,6 @@ void	stacks_push2another(t_stacks *stacks, enum e_stacks src_stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_PB, 0);
 	else
 		dlist_add_prev(stacks->dummy_ops, OP_PA, 0);
-
 	print_last_operation(stacks);
 }
 
@@ -43,7 +43,6 @@ void	stacks_swap(t_stacks *stacks, enum e_stacks stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_SA, 0);
 	else
 		dlist_add_prev(stacks->dummy_ops, OP_SB, 0);
-
 	print_last_operation(stacks);
 }
 
@@ -57,7 +56,6 @@ void	stacks_rotate(t_stacks *stacks, enum e_stacks stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_RA, 0);
 	else
 		dlist_add_prev(stacks->dummy_ops, OP_RB, 0);
-
 	print_last_operation(stacks);
 }
 
@@ -71,7 +69,6 @@ void	stacks_rrotate(t_stacks *stacks, enum e_stacks stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_RRA, 0);
 	else
 		dlist_add_prev(stacks->dummy_ops, OP_RRB, 0);
-
 	print_last_operation(stacks);
 }
 

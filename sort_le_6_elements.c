@@ -16,6 +16,49 @@ static void	update_dummy_ops(t_dfs *dfs_data, int turn)
 	fprintf(stderr, "best_turn: %d\n", dfs_data->best_turn);
 }
 
+static void	do_operation4dfs(t_stacks *stacks,
+	t_dfs *dfs_data, enum e_stacks stack_id, enum e_operations op)
+{
+	do_operation(stacks, dfs_data->dummy_tmp_ops, op);
+	if ((stack_id == STACK_A && op == OP_PB)
+		|| (stack_id == STACK_B && op == OP_PA))
+		dfs_data->push2another_count++;
+	else if ((stack_id == STACK_A && op == OP_PA)
+		|| (stack_id == STACK_B && op == OP_PB))
+		dfs_data->push2another_count--;
+}
+
+static void	undo_operation4dfs(t_stacks *stacks,
+	  t_dfs *dfs_data, enum e_stacks stack_id, enum e_operations op)
+{
+	undo_operation(stacks, dfs_data->dummy_tmp_ops, op);
+	if ((stack_id == STACK_A && op == OP_PB)
+		|| (stack_id == STACK_B && op == OP_PA))
+		dfs_data->push2another_count--;
+	else if ((stack_id == STACK_A && op == OP_PA)
+		|| (stack_id == STACK_B && op == OP_PB))
+		dfs_data->push2another_count++;
+}
+
+/* 自分のスタック(stack_id)ではないスタックのデータは変更しない
+ */
+static bool	is_invalid_operation4dfs(t_stacks *stacks,
+	t_dfs *dfs_data, enum e_stacks stack_id, enum e_operations op)
+{
+	bool	is_stack_a_invalid;
+	bool	is_stack_b_invalid;
+
+	is_stack_a_invalid = stack_id == STACK_A
+		&& (op == OP_RB || op == OP_RRB || op == OP_SB
+			|| (dfs_data->push2another_count == 0 && op == OP_PA));
+	is_stack_b_invalid = stack_id == STACK_B
+		&& (op == OP_RA || op == OP_RRA || op == OP_SA
+			|| (dfs_data->push2another_count == 0 && op == OP_PB));
+	return (!is_valid_operation(stacks, dfs_data->dummy_tmp_ops, op)
+		|| op == OP_RR || op == OP_RRR || op == OP_SS
+		|| is_stack_a_invalid || is_stack_b_invalid);
+}
+
 void	sort_stack_dfs(t_stacks *stacks,
 	t_dfs *dfs_data, enum e_stacks stack_id, int turn)
 {
@@ -31,24 +74,11 @@ void	sort_stack_dfs(t_stacks *stacks,
 	op = OP_SA - 1;
 	while (++op <= OP_RRR)
 	{
-		if (!is_valid_operation(stacks, dfs_data->dummy_tmp_ops, op))
+		if (is_invalid_operation4dfs(stacks, dfs_data, stack_id, op))
 			continue ;
-		// 自分のスタック(stack_id)ではないスタックのデータは変更しない
-		if (op == OP_RR || op == OP_RRR || op == OP_SS
-			|| (stack_id == STACK_A && (op == OP_RB || op == OP_RRB || op == OP_SB || (dfs_data->push2another_count == 0 && op == OP_PA)))
-			|| (stack_id == STACK_B && (op == OP_RA || op == OP_RRA || op == OP_SA || (dfs_data->push2another_count == 0 && op == OP_PB))))
-			continue ;
-		do_operation(stacks, dfs_data->dummy_tmp_ops, op);
-		if ((stack_id == STACK_A && op == OP_PB) || (stack_id == STACK_B && op == OP_PA))
-			dfs_data->push2another_count++;
-		else if ((stack_id == STACK_A && op == OP_PA) || (stack_id == STACK_B && op == OP_PB))
-			dfs_data->push2another_count--;
+		do_operation4dfs(stacks, dfs_data, stack_id, op);
 		sort_stack_dfs(stacks, dfs_data, stack_id, turn + 1);
-		undo_operation(stacks, dfs_data->dummy_tmp_ops, op);
-		if ((stack_id == STACK_A && op == OP_PB) || (stack_id == STACK_B && op == OP_PA))
-			dfs_data->push2another_count--;
-		else if ((stack_id == STACK_A && op == OP_PA) || (stack_id == STACK_B && op == OP_PB))
-			dfs_data->push2another_count++;
+		undo_operation4dfs(stacks, dfs_data, stack_id, op);
 	}
 }
 

@@ -9,7 +9,7 @@ static void	push_b2a(t_stacks *stacks, int new_group)
 	stacks_push2another(stacks, STACK_B);
 }
 
-void	partition_stack_b_and_merge2a(t_stacks *stacks)
+static void	partition_stack_b(t_stacks *stacks)
 {
 	int		pivot;
 	int		i;
@@ -20,9 +20,8 @@ void	partition_stack_b_and_merge2a(t_stacks *stacks)
 		&& dlist_len(stacks->dummy_b) > 6)
 	{
 		pivot = dlist_get_mid_value(stacks->dummy_b,
-			dlist_len(stacks->dummy_b));
+				dlist_len(stacks->dummy_b));
 		stacks->pivot_count++;
-		fprintf(stderr, "pivot(b2a): %d, pivot_count: %d\n", pivot, stacks->pivot_count);
 		current = stacks->dummy_b->next;
 		i = dlist_len(stacks->dummy_b);
 		while (i-- > 0)
@@ -36,6 +35,11 @@ void	partition_stack_b_and_merge2a(t_stacks *stacks)
 		}
 		print_stacks(stacks);
 	}
+}
+
+void	partition_stack_b_and_merge2a(t_stacks *stacks)
+{
+	partition_stack_b(stacks);
 	if (dlist_len(stacks->dummy_b) <= 6)
 		sort_le_6_elements(stacks, STACK_B);
 	stacks->pivot_count++;
