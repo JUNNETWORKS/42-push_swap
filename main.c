@@ -39,4 +39,5 @@ int	main(int argc, char **argv)
 	sort_stacks(&stacks);
 	optimize_operations(&stacks);
 	print_all_operations(&stacks);
+	free_stacks(&stacks);
 }
