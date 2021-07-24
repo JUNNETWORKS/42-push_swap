@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <limits.h>
 #include "libft/libft.h"
 #include "push_swap.h"
 
@@ -7,6 +8,10 @@
  *
  * return false if nptr is invalid or overflow.
  * otherwise, return true.
+ *
+ * inequality below detects overflow.
+ *   10 * ans + (s[i] - '0') > INT_MAX
+ *   10 * ans - (s[i] - '0') < INT_MIN
  */
 static bool	my_atoi(const char *nptr, int *num)
 {
@@ -17,14 +22,15 @@ static bool	my_atoi(const char *nptr, int *num)
 	if (*nptr == '+' || *nptr == '-')
 		if (*nptr++ == '-')
 			sign = -1;
-	if (is_overflow(nptr, sign))
+	if (!ft_isdigit(*nptr))
 		return (false);
 	while (*nptr)
 	{
-		if (ft_isdigit(*nptr))
-			*num = *num * 10 + (*nptr++ - '0');
-		else
+		if (!ft_isdigit(*nptr)
+			|| sign * *num > (INT_MAX - (*nptr - '0')) / 10
+			|| sign * *num < (INT_MIN + (*nptr - '0')) / 10)
 			return (false);
+		*num = *num * 10 + (*nptr++ - '0');
 	}
 	*num *= sign;
 	return (true);
