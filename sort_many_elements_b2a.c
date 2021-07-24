@@ -33,7 +33,6 @@ static void	partition_stack_b(t_stacks *stacks)
 				stacks_rotate(stacks, STACK_B);
 			current = tmp;
 		}
-		print_stacks(stacks);
 	}
 }
 
@@ -43,7 +42,6 @@ void	partition_stack_b_and_merge2a(t_stacks *stacks)
 	if (dlist_len(stacks->dummy_b) <= 6)
 		sort_le_6_elements(stacks, STACK_B);
 	stacks->pivot_count++;
-	print_stacks(stacks);
 	while (dlist_len(stacks->dummy_b))
 	{
 		push_b2a(stacks, stacks->pivot_count);

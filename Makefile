@@ -12,7 +12,7 @@ SRCS := main.c parse_argv.c \
 		dlist1.c dlist2.c dlist3.c dlist4.c dlist_group.c \
 		deque1.c deque2.c \
 		stacks.c stacks_ops.c stacks_ops_utils.c sort_many_elements_a2b.c sort_many_elements_b2a.c \
-		sort_stacks.c sort_le_3_elements.c sort_le_6_elements.c sort_many_elements.c is_stack_sorted.c \
+		sort_stacks.c sort_le_3_elements.c sort_le_6_elements.c sort_many_elements.c sort_stacks_dfs.c is_stack_sorted.c \
 		optimize_operations.c \
 		sort_arr.c utils.c
 OBJS := ${SRCS:.c=.o}

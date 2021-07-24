@@ -2,14 +2,6 @@
 #include "libft/libft.h"
 #include "stacks.h"
 
-static void	print_last_operation(t_stacks *stacks)
-{
-	const char	*str;
-	str = get_operation_str(stacks->dummy_ops->prev->val);
-	fprintf(stderr, "%s\n", str);
-	free((void *)str);
-}
-
 /*
  * Take the first element at the top of b and put it at the top of a.
  * Do nothing if b is empty.
@@ -30,7 +22,6 @@ void	stacks_push2another(t_stacks *stacks, enum e_stacks src_stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_PB, 0);
 	else
 		dlist_add_prev(stacks->dummy_ops, OP_PA, 0);
-	print_last_operation(stacks);
 }
 
 void	stacks_swap(t_stacks *stacks, enum e_stacks stack_id)
@@ -43,7 +34,6 @@ void	stacks_swap(t_stacks *stacks, enum e_stacks stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_SA, 0);
 	else
 		dlist_add_prev(stacks->dummy_ops, OP_SB, 0);
-	print_last_operation(stacks);
 }
 
 void	stacks_rotate(t_stacks *stacks, enum e_stacks stack_id)
@@ -56,7 +46,6 @@ void	stacks_rotate(t_stacks *stacks, enum e_stacks stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_RA, 0);
 	else
 		dlist_add_prev(stacks->dummy_ops, OP_RB, 0);
-	print_last_operation(stacks);
 }
 
 void	stacks_rrotate(t_stacks *stacks, enum e_stacks stack_id)
@@ -69,7 +58,6 @@ void	stacks_rrotate(t_stacks *stacks, enum e_stacks stack_id)
 		dlist_add_prev(stacks->dummy_ops, OP_RRA, 0);
 	else
 		dlist_add_prev(stacks->dummy_ops, OP_RRB, 0);
-	print_last_operation(stacks);
 }
 
 void	print_all_operations(t_stacks *stacks)
@@ -87,40 +75,4 @@ void	print_all_operations(t_stacks *stacks)
 		free((char *)op_str);
 		current = current->next;
 	}
-}
-
-void	print_stacks(t_stacks *stacks)
-{
-	int		len_a;
-	int		len_b;
-	t_dlist	*current_a;
-	t_dlist	*current_b;
-
-	len_a = dlist_len(stacks->dummy_a);
-	len_b = dlist_len(stacks->dummy_b);
-	current_a = stacks->dummy_a->next;
-	current_b = stacks->dummy_b->next;
-	while (len_a > 0 || len_b > 0)
-	{
-		if (len_a > 0 && len_a >= len_b)
-		{
-			fprintf(stderr, "|%4d (%3d)|", current_a->val, current_a->group);
-			current_a = current_a->next;
-			len_a--;
-		}
-		else
-			fprintf(stderr, "|          |");
-		fprintf(stderr, "  ");
-		if (len_b > 0 && len_b > len_a)
-		{
-			fprintf(stderr, "|%4d (%3d)|", current_b->val, current_b->group);
-			current_b = current_b->next;
-			len_b--;
-		}
-		else
-			fprintf(stderr, "|          |");
-		fprintf(stderr, "\n");
-	}
-	fprintf(stderr, " ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄   ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄ ̄\n");
-	fprintf(stderr, "      a           b   \n");
 }

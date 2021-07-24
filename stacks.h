@@ -47,7 +47,6 @@ void		stacks_push2another(t_stacks *stacks, enum e_stacks src_stack_id);
 void		stacks_swap(t_stacks *stacks, enum e_stacks stack_id);
 void		stacks_rotate(t_stacks *stacks, enum e_stacks stack_id);
 void		stacks_rrotate(t_stacks *stacks, enum e_stacks stack_id);
-void		print_stacks(t_stacks *stacks);
 
 /* sort */
 void		sort_stacks(t_stacks *stacks);

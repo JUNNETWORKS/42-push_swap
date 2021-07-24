@@ -5,18 +5,10 @@
 
 static void	quick_sort_stacks(t_stacks *stacks)
 {
-	int	old_ops_count;
-
 	if (is_stack_sorted_asc(stacks->dummy_a, dlist_len(stacks->dummy_a)))
 		return ;
-	old_ops_count = dlist_len(stacks->dummy_ops);
 	partition_stack_a(stacks);
-	fprintf(stderr, "\n----- partition_stack_a() finished (%+d) -----\n", dlist_len(stacks->dummy_ops) - old_ops_count);
-	print_stacks(stacks);
-	old_ops_count = dlist_len(stacks->dummy_ops);
 	partition_stack_b_and_merge2a(stacks);
-	fprintf(stderr, "\n----- partition_stack_b_and_merge2a() finished (%+d) -----\n", dlist_len(stacks->dummy_ops) - old_ops_count);
-	print_stacks(stacks);
 	quick_sort_stacks(stacks);
 }
 
