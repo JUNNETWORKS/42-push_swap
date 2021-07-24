@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	t_stacks	stacks;
 
 	init_stacks(&stacks);
-	if (argc <= 1 || !parse_argv(stacks.dummy_a, argv + 1))
+	if (argc <= 1 || argc > 10000 || !parse_argv(stacks.dummy_a, argv + 1))
 	{
 		ft_putendl_fd("Error", STDERR_FILENO);
 		return (1);
