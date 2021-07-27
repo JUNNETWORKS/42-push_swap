@@ -1,7 +1,7 @@
 NAME := push_swap
 CC := gcc
 CFLAGS := -Werror -Wall -Wextra -g
-CFLAGS += -fsanitize=address
+# CFLAGS += -fsanitize=address
 
 LIBFT_PATH := libft
 LIBFT_MAKE := $(MAKE) -C $(LIBFT_PATH)
