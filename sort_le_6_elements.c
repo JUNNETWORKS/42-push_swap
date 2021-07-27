@@ -15,7 +15,7 @@ void	sort_le_6_elements(t_stacks *stacks, enum e_stacks stack_id)
 	dfs_data.dummy_tmp_ops = create_dlist(0);
 	dfs_data.stack_size = dlist_len(get_stack_from_id(stacks, stack_id));
 	dfs_data.push2another_count = 0;
-	if (!dfs_data.dummy_tmp_ops)
+	if (!dfs_data.dummy_ops || !dfs_data.dummy_tmp_ops)
 		exit(1);
 	sort_stack_dfs(stacks, &dfs_data, stack_id, 0);
 	current = dfs_data.dummy_ops->next;
