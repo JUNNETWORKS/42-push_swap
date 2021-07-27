@@ -60,7 +60,7 @@ int	*dlist2arr(t_dlist *dummy)
 	len = dlist_len(dummy);
 	arr = malloc(sizeof(int) * len);
 	if (!arr)
-		return (NULL);
+		exit(1);
 	i = 0;
 	current = dummy->next;
 	while (i < len)
