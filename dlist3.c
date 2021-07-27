@@ -16,6 +16,8 @@ t_dlist	*dlist_pop(t_dlist *dummy)
 
 void	dlist_push(t_dlist *dummy, t_dlist *element)
 {
+	if (!dummy || !element)
+		return ;
 	dummy->next->prev = element;
 	element->next = dummy->next;
 	element->prev = dummy;
