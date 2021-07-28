@@ -26,8 +26,9 @@ int	main(int argc, char **argv)
 {
 	t_stacks	stacks;
 
+	(void)argc;
 	init_stacks(&stacks);
-	if (argc <= 1 || !parse_argv(stacks.dummy_a, argv + 1))
+	if (!parse_argv(stacks.dummy_a, argv + 1))
 	{
 		ft_putendl_fd("Error", STDERR_FILENO);
 		free_stacks(&stacks);
